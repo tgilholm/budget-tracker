@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BudgetTracker</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="add">Add</string>
+    <string name="overview">Overview</string>
+    <string name="transactions">Transactions</string>
+</resources>
