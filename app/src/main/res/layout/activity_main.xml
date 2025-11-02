@@ -1,42 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+ <!-- TODO Remove whitespace bar above title -->
 
     <!--A LinearLayout is used to arrange the elements vertically -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:fitsSystemWindows="true"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        tools:context=".MainActivity">
 
-        <!-- Displays a title bar section to display the name of the current tab above the nav bar -->
-        <Toolbar
-            android:id="@+id/title_bar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/budgetBlue">
-
-            <!-- Show the title text in the middle of the bar -->
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="18sp"/>
-
-            <!-- TODO- ADD SETTINGS BUTTON ON TOOLBAR-->
-        </Toolbar>
-
-        <!--Add a TabLayout to act as a navigation bar at the top of the display -->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+        <!-- Add an AppBarLayout to contain all the elements at the top of the display -->
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:background="@color/budgetBlue">
+
+            <!-- Displays a title bar section to display the name of the current tab above the nav bar -->
+            <!-- Replaced Toolbar with MaterialToolbar to handle camera notch on Pixel displays-->
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/title_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title = "xyz"
+                app:titleTextColor="@color/white"
+                app:titleCentered="true">
+            </com.google.android.material.appbar.MaterialToolbar>
+
+                <!-- TODO- ADD SETTINGS BUTTON ON TOOLBAR-->
+            <!-- Add a TabLayout to act as a navigation bar -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <!-- Add a ViewPager to the window for swiping between fragments -->
         <androidx.viewpager2.widget.ViewPager2
@@ -45,4 +46,3 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>

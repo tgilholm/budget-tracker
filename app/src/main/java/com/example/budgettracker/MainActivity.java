@@ -1,9 +1,16 @@
 package com.example.budgettracker;
 import android.os.Bundle;
-import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 /*
@@ -18,20 +25,36 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         setContentView(R.layout.activity_main);
+        EdgeToEdge.enable(this);
 
-        // Connects a new TextView with the id "title" in activity_main.xml
-        TextView title = findViewById(R.id.title);
-        title.setText(R.string.overview);
+        /*
+         window.statusBarColor is deprecated since Android 14
+         WindowInsets is used instead to set the status bar colour
+         */
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 
-        // Creates the ViewPager and attaches an AppFragmentStateAdaptor to it
+            // Set the underlying background to blue, this is drawn over in white by the fragments
+            // Also sets the bottom bar to blue :/
+            v.setBackground(ResourcesCompat.getDrawable(getResources(), R.color.budgetBlue, getTheme()));
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        // Connect to the MaterialToolbar to dynamically change the page title
+        MaterialToolbar toolbar = findViewById(R.id.title_bar);
+        toolbar.setTitle(R.string.overview);
+
+        // Create the ViewPager and attach an AppFragmentStateAdaptor to it
         ViewPager2 vp = findViewById(R.id.swipePager);
         vp.setAdapter(new AppFragmentStateAdapter(this));
 
         // Attach the ViewPager to the TabLayout with a TabLayoutMediator
         new TabLayoutMediator(findViewById(R.id.tab_layout), vp,
 
-                // Creates a TabConfigurationStrategy to set the text for each tab
+                // Create a TabConfigurationStrategy to set the text for each tab
                 (tab, position) -> {
                     switch (position) {
                         case 0:
@@ -47,20 +70,20 @@ public class MainActivity extends AppCompatActivity {
                 }
         ).attach();
 
-        // Update the title bar to the title of the currently-displayed fragment
+        // Update the title bar to the name of the currently-displayed fragment
         vp.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 switch (position)
                 {
                     case 0:
-                        title.setText(R.string.overview);
+                        toolbar.setTitle(R.string.overview);
                         break;
                     case 1:
-                        title.setText(R.string.add);
+                        toolbar.setTitle(R.string.add);
                         break;
                     case 2:
-                        title.setText(R.string.transactions);
+                        toolbar.setTitle(R.string.transactions);
                         break;
                 }
                 super.onPageSelected(position);

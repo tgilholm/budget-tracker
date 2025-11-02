@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-// Extends the FragmentStateAdapter class to create instances of each fragment
+// Extend the FragmentStateAdapter class to create instances of each fragment
 public class AppFragmentStateAdapter extends FragmentStateAdapter {
 
     // Inherited constructor from parent class, calls "super" to invoke parent constructor
