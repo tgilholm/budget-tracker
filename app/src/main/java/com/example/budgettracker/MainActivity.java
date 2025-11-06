@@ -1,5 +1,7 @@
 package com.example.budgettracker;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Set the underlying background to blue, this is drawn over in white by the fragments
             // Also sets the bottom bar to blue :/
-            v.setBackground(ResourcesCompat.getDrawable(getResources(), R.color.budgetBlue, getTheme()));
+            //v.setBackground(ResourcesCompat.getDrawable(getResources(), R.color.budgetBlue, getTheme()));
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
@@ -96,5 +98,18 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageSelected(position);
             }
         });
+    }
+
+    //
+    public void settingsButtonPressed(View v)
+    {
+        Toast toast = Toast.makeText(this, "Settings", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    public void notificationsButtonPressed(View v)
+    {
+        Toast toast = Toast.makeText(this, "Notifications", Toast.LENGTH_LONG);
+        toast.show();
     }
 }
