@@ -15,6 +15,11 @@ import android.view.ViewGroup;
 
 public class OverviewFragment extends Fragment {
 
+    /* TODO: Update remaining budget
+    Update txtBudgetAmount when new transactions are added.
+    Subtract the total outgoings from the total budget to get the remaining budget
+     */
+
     /* TODO: Pie-chart functionality
     Pie charts will have colour-coded slices representing constituent categories
     They will automatically calculate how much of the spending is taken up by which category
@@ -22,6 +27,10 @@ public class OverviewFragment extends Fragment {
     Categories are then shown to the right of the pie chart, ordered by percentage
      */
 
+    /*TODO: Recent Transactions
+    Get the most recent (last week or so) transactions from the file and display them in a
+    list view, sorted by date.
+     */
 
 
     public OverviewFragment() {

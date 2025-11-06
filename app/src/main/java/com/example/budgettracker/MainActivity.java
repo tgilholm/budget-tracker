@@ -22,6 +22,13 @@ import com.google.android.material.tabs.TabLayoutMediator;
  */
 
 public class MainActivity extends AppCompatActivity {
+
+    /* TODO
+    Settings & notifications icons, leading to separate activities
+    These icons are on the task bar at the top of the view
+     */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
