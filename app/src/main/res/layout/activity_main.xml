@@ -19,15 +19,13 @@
             android:layout_height="wrap_content"
             android:background="@color/budgetBlue">
 
-            <!-- Displays a title bar section to display the name of the current tab above the nav bar -->
-            <!-- Replaced Toolbar with MaterialToolbar to handle camera notch on Pixel displays-->
-
-            <!-- Add a TabLayout to act as a navigation bar -->
-
+                <!-- Contain the MaterialToolbar & icons in a ConstraintLayout -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <!-- Displays a title bar section to display the name of the current tab above the nav bar -->
+                    <!-- Replaced Toolbar with MaterialToolbar to handle camera notch on Pixel displays-->
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/title_bar"
                         android:layout_width="match_parent"
@@ -39,6 +37,7 @@
                         app:titleTextColor="@color/white">
                     </com.google.android.material.appbar.MaterialToolbar>
 
+                    <!-- Display the Notifications icon -->
                     <ImageButton
                         android:id="@+id/notificationButton"
                         android:layout_width="wrap_content"
@@ -54,9 +53,9 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
-
                     </ImageButton>
 
+                    <!-- Display the Settings icon -->
                     <ImageButton
                         android:id="@+id/settingsButton"
                         android:layout_width="wrap_content"
@@ -72,18 +71,16 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
-
                     </ImageButton>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Add a TabLayout to act as a navigation bar -->
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </com.google.android.material.tabs.TabLayout>
         </com.google.android.material.appbar.AppBarLayout>
-
-
 
         <!-- Add a ViewPager to the window for swiping between fragments -->
         <androidx.viewpager2.widget.ViewPager2

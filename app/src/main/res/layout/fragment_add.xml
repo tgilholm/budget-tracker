@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <!-- Elements are held in a ConstraintLayout -->
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddFragment">
+    tools:context=".AddFragment"
+    android:background="@color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        <!-- TODO edit text colours -->
+    <!-- TODO Add comments for each view -->
 
         <!-- Create label to tell users to type in a number -->
-        <!-- TODO edit text colours -->
-        <!-- TODO refactor txtAddAmount to persist a £ sign and prompt user input -->
+        <!-- Add a TextInputEditText to receive user input for the transaction amount -->
         <TextView
             android:id="@+id/txtAddAmountLabel"
             android:layout_width="wrap_content"
@@ -23,21 +22,227 @@
             android:layout_marginTop="48dp"
             android:text="@string/label_add_transaction"
             android:textColor="@color/material_dynamic_neutral60"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
         </TextView>
 
-        <!-- Add a TextInputEditText to receive user input for the transaction amount -->
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="132dp"
-            android:layout_height="44dp"
+    <TextView
+        android:id="@+id/txtSetCategoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/set_a_category"
+        android:textColor="@color/material_dynamic_neutral60"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputAddAmount">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtSetCategoryLabel2"
+        android:layout_width="138dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/repeat_every"
+        android:textColor="@color/material_dynamic_neutral60"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupSelectType">
+
+    </TextView>
+
+    <!-- TextInputEditText for the transaction amount- force on one line -->
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputAddAmount"
+        android:layout_width="132dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="36dp"
+        android:hint="@string/amount"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddAmountLabel">
+
+    </com.google.android.material.textfield.TextInputEditText>
+
+        <TextView
+            android:id="@+id/txtPoundSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:hint="£"
+            android:layout_marginTop="12dp"
+            android:text="@string/pound_sign"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtAddAmountLabel">
+            app:layout_constraintTop_toBottomOf="@+id/txtAddAmountLabel" />
 
-        </com.google.android.material.textfield.TextInputEditText>
+        <!-- Allows users to select between incoming & outgoing transactions -->
+    <RadioGroup
+        android:id="@+id/radioGroupSelectType"
+        android:layout_width="134dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+        <RadioButton
+            android:id="@+id/rbIncoming"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/incoming" />
+
+        <RadioButton
+            android:id="@+id/rbOutgoing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/outgoing" />
+    </RadioGroup>
+
+        <!-- Contains each category in a Chip -->
+        <!-- Chips are styled to be a choice- users can only select one category at a time -->
+        <!-- singleSelection is set to 'true' to facilitate this -->
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupCategories"
+        android:layout_width="189dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroupSelectRepeat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSetCategoryLabel"
+        app:singleSelection="true">
+
+        <!-- Default Categories -->
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_category_entertainment" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_category_petrol" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_category_pets" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_category_travel" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_category_shopping" />
+
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroupSelectRepeat"
+        android:layout_width="137dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSetCategoryLabel2">
+
+        <RadioButton
+            android:id="@+id/rbNever"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/never" />
+
+        <RadioButton
+            android:id="@+id/rbDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/day" />
+
+        <RadioButton
+            android:id="@+id/rbWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/week" />
+
+        <RadioButton
+            android:id="@+id/rbMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/month" />
+
+        <RadioButton
+            android:id="@+id/rbYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/year" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:text="Date/Time"
+        android:textColor="@color/material_dynamic_neutral60"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroupCategories">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/editTextTime"
+        android:layout_width="211dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Set a Date"
+        android:inputType="time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDateTime" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Set a Time"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+
+    <ImageButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="177dp"
+        android:layout_marginEnd="178dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Add Transaction"
+        android:src="@android:drawable/ic_menu_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

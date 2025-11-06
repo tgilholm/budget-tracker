@@ -1,11 +1,37 @@
 <resources>
     <string name="app_name">BudgetTracker</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- Fragment Titles-->
     <string name="add">Add</string>
     <string name="overview">Overview</string>
     <string name="transactions">Transactions</string>
+
+    <!-- Overview Layout Strings -->
     <string name="label_budget_remaining">Budget Remaining</string>
+
+    <!-- Add Layout Strings -->
     <string name="label_add_transaction">Add a Transaction</string>
+    <string name="set_a_category">Set a Category</string>
+    <string name="pound_sign">£</string>
+    <string name="incoming">Incoming</string>
+    <string name="outgoing">Outgoing</string>
+
+    <!-- Default Category Strings -->
+    <string name="default_category_petrol">Petrol</string>
+    <string name="default_category_shopping">Shopping</string>
+    <string name="default_category_travel">Travel</string>
+    <string name="default_category_entertainment">Entertainment</string>
+    <string name="default_category_pets">Pets</string>
+
+
+    <!-- Miscellaneous -->
     <string name="notifications">Notifications</string>
     <string name="settings">Settings</string>
+    <string name="repeat_every">Repeat Every...</string>
+    <string name="never">Never</string>
+    <string name="day">Day</string>
+    <string name="week">Week</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="amount">Amount</string>
 </resources>
