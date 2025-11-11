@@ -5,13 +5,13 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.budgettracker.utility.AppFragmentStateAdapter;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -112,4 +112,5 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this, "Notifications", Toast.LENGTH_LONG);
         toast.show();
     }
+
 }

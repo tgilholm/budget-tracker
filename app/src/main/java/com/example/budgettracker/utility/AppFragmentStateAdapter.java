@@ -1,9 +1,13 @@
-package com.example.budgettracker;
+package com.example.budgettracker.utility;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.budgettracker.fragments.AddFragment;
+import com.example.budgettracker.fragments.OverviewFragment;
+import com.example.budgettracker.fragments.TransactionsFragment;
 
 // Extend the FragmentStateAdapter class to create instances of each fragment
 public class AppFragmentStateAdapter extends FragmentStateAdapter {

@@ -1,4 +1,4 @@
-package com.example.budgettracker;
+package com.example.budgettracker.fragments;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.budgettracker.R;
 
 /**
  * The fragment subclass for the Overview section of the app
