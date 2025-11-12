@@ -4,7 +4,6 @@
     <style name="Base.Theme.BudgetTracker" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/budgetBlue</item>
         <item name="colorPrimaryVariant">@color/budgetBlue</item>
-
         <item name="android:statusBarColor">@color/budgetBlue</item>
     </style>
 
