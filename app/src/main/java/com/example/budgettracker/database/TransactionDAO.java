@@ -17,11 +17,11 @@ public interface TransactionDAO {
     // Define each of the transactions needed here
 
     // Return the entire table
-    @Query("SELECT * FROM transactions")
+    @Query("SELECT * FROM 'transaction'")
     List<Transaction> getAll();
 
     // Returns only the transaction matching the provided transaction ID
-    @Query("SELECT * FROM transactions WHERE id = (:id)")
+    @Query("SELECT * FROM 'transaction' WHERE id = (:id)")
     Transaction getTransactionByID(int id);
 
     // Ellipsis after the parameter allows adding any number of transactions

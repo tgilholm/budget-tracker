@@ -31,14 +31,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity
 {
-    // Create an instance of the TransactionViewModel
-
-    // Create an instance of the Room Database
-
-    public static AppDB appDB;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,6 +39,9 @@ public class MainActivity extends AppCompatActivity
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         setContentView(R.layout.activity_main);
         EdgeToEdge.enable(this);
+
+        // Get an instance of the appDB before any other thread has a chance to
+        AppDB appDB = AppDB.getDBInstance(this);
 
         // Initialise the TransactionViewModel- all other fragments should use this instance
         TransactionViewModel transactionViewModel = new ViewModelProvider(this).get(TransactionViewModel.class);

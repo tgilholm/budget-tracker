@@ -8,6 +8,9 @@ import java.util.Locale;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.Contract;
 
@@ -25,6 +28,10 @@ import com.example.budgettracker.enums.TransactionType;
     - Repeating durations e.g. weekly
 
  */
+
+// Also acts as an entity in the Room Database
+
+@Entity(tableName = "transaction")
 public final class Transaction
 {
     // Use a static field for the nextID parameter
@@ -37,11 +44,22 @@ public final class Transaction
      */
     private static long nextID;
 
+    @PrimaryKey
     private final String id;
+
+    @ColumnInfo(name = "amount")
     private final double amount;
+
+    @ColumnInfo(name = "type")
     private final TransactionType type;
+
+    @ColumnInfo(name = "datetime")
     private final Calendar dateTime;
+
+    @ColumnInfo(name = "category")
     private final String category;
+
+    @ColumnInfo(name = "repeat")
     private final RepeatDuration repeatDuration;
 
     public Transaction(double amount, TransactionType type, Calendar dateTime, String category, RepeatDuration repeatDuration)
