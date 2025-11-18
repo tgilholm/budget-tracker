@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -41,9 +40,13 @@ dependencies {
     // Add dependencies for the ViewPager2 and MPAndroidChart libraries
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    // Add dependency for Room DB
+    implementation(libs.room.runtime)
     implementation(libs.recyclerview)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    annotationProcessor(libs.room.compiler)
 }

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.budgettracker.adapters.AppFragmentStateAdapter;
+import com.example.budgettracker.database.AppDB;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -32,9 +33,9 @@ public class MainActivity extends AppCompatActivity
 {
     // Create an instance of the TransactionViewModel
 
-    // TODO database connection
+    // Create an instance of the Room Database
 
-
+    public static AppDB appDB;
 
 
 
