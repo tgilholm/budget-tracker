@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgettracker.R;
@@ -18,7 +17,6 @@ import com.example.budgettracker.utility.ColorHandler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 // The adapter for the RecyclerView in OverviewFragment
 // Extends ListAdapter to improve performance- does not need to rewrite entire list on update
