@@ -5,10 +5,13 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.example.budgettracker.Transaction;
+import com.example.budgettracker.utility.Converters;
 
 @Database(entities = {Transaction.class}, version = 1, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class AppDB extends RoomDatabase
 {
     public abstract TransactionDAO transactionDAO();
@@ -31,12 +34,15 @@ public abstract class AppDB extends RoomDatabase
         {
             synchronized (AppDB.class) {
                 if (DB_INSTANCE == null) {
+                    // Create an instance of the type converter
+                    Converters converter = new Converters();
+
                     // Build a new database
                     DB_INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             AppDB.class,
                             "budgetbuddy_DB"  // Name of the DB itself
-                    ).build();
+                    ).addTypeConverter(converter).build();
                 }
             }
         }

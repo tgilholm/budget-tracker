@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.budgettracker"
-        minSdk = 26 // Minimum SDK updated to support java.time
+        minSdk = 35 // Minimum SDK updated to support java.time and getLast()
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"

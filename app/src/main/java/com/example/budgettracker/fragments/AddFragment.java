@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -28,6 +27,7 @@ import com.example.budgettracker.utility.InputValidator;
 import com.example.budgettracker.timeselector.TimePickerFragment;
 import com.example.budgettracker.enums.RepeatDuration;
 import com.example.budgettracker.enums.TransactionType;
+import com.example.budgettracker.utility.Converters;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,7 +35,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 
 /**
@@ -47,12 +46,8 @@ public class AddFragment extends Fragment
 {
     private EditText dateText;
     private EditText timeText;
-    private FloatingActionButton addButton;
     private ChipGroup chipGroupCategories;
 
-
-    // Used to hold user-defined time values
-    private final Calendar userTime;
 
     private TransactionViewModel transactionViewModel;
 
@@ -68,8 +63,6 @@ public class AddFragment extends Fragment
 
     public AddFragment()
     {
-        // Get the current time in the constructor
-        userTime = Calendar.getInstance();
     }
 
     // Handle the logic for the fragment startup
@@ -100,7 +93,7 @@ public class AddFragment extends Fragment
         View v = inflater.inflate(R.layout.fragment_add, container, false);
 
         // VIEW IDs
-        addButton = v.findViewById(R.id.addButton);
+        FloatingActionButton addButton = v.findViewById(R.id.addButton);
         timeText = v.findViewById(R.id.editTextTime);
         dateText = v.findViewById(R.id.editTextDate);
 
@@ -196,20 +189,14 @@ public class AddFragment extends Fragment
     // Sets the DateText and TimeText fields to the current time
     private void setInitialDateTime()
     {
-        // Set the date and time fields to the current date & time
-        int year = userTime.get(Calendar.YEAR);
-        int month = userTime.get(Calendar.MONTH);
-        int day = userTime.get(Calendar.DAY_OF_MONTH);
-        int minute = userTime.get(Calendar.MINUTE);
-        int hour = userTime.get(Calendar.HOUR_OF_DAY);
+        Calendar userTime = Calendar.getInstance();
 
         // Always use 00:00 format for time output, i.e. 03:00 instead of 3.0
         // Set the locale to be the user's region
-        timeText.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
+        timeText.setText(Converters.calendarToHourMinute(userTime));
 
-        // Month is indexed from 0, so add 1 to prevent off by ones
-        String currentDate = day + "/" + (month + 1) + "/" + year;
-        dateText.setText(currentDate);
+        dateText.setText(Converters.calendarToDayMonthYear(userTime));
+
     }
 
 
@@ -243,7 +230,8 @@ public class AddFragment extends Fragment
         Log.v("AddFragment", "Adding new transaction");
 
         // Add the transaction to the list of transactions
-        transactionViewModel.addTransaction(new Transaction(amount, type, dateTime, category, repeatDuration));
+        Transaction newTransaction = new Transaction(amount, type, dateTime, category, repeatDuration);
+        transactionViewModel.addTransaction(newTransaction);
     }
 
 

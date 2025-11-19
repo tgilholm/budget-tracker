@@ -1,8 +1,5 @@
 package com.example.budgettracker;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
@@ -11,8 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import org.jetbrains.annotations.Contract;
 
 import com.example.budgettracker.enums.RepeatDuration;
 import com.example.budgettracker.enums.TransactionType;
@@ -44,8 +39,9 @@ public final class Transaction
      */
     private static long nextID;
 
+    @NonNull
     @PrimaryKey
-    private final String id;
+    private String id;
 
     @ColumnInfo(name = "amount")
     private final double amount;
@@ -53,7 +49,7 @@ public final class Transaction
     @ColumnInfo(name = "type")
     private final TransactionType type;
 
-    @ColumnInfo(name = "datetime")
+    @ColumnInfo(name = "datetime" )
     private final Calendar dateTime;
 
     @ColumnInfo(name = "category")
@@ -74,6 +70,7 @@ public final class Transaction
     }
 
     // Getter methods
+    @NonNull
     public String getId()
     {
         return id;
@@ -139,5 +136,9 @@ public final class Transaction
     public int hashCode() {
         // Generates a unique hashcode for this object using all of its fields
         return Objects.hash(id, amount, type, dateTime, category, repeatDuration);
+    }
+
+    public void setId(@NonNull String id) {
+        this.id = id;
     }
 }
