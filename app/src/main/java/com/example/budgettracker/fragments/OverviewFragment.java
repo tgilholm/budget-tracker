@@ -27,6 +27,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -80,13 +81,13 @@ public class OverviewFragment extends Fragment
         // Set up the recyclerViewAdapter with the current (sorted) transaction list
         if (transactions != null)
         {
-            recyclerViewAdapter = new RecyclerViewAdapter(InputValidator.sortTransactions(transactions));
+            recyclerViewAdapter = new RecyclerViewAdapter(InputValidator.sortTransactions(transactions), R.layout.transaction_item);
         }
 
         // Set up the recycler view
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(recyclerViewAdapter);
+        RecyclerView rvPartialHistory = view.findViewById(R.id.rvPartialHistory);
+        rvPartialHistory.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvPartialHistory.setAdapter(recyclerViewAdapter);
 
         // Set up an observer on the TransactionViewModel
         // Updates the RecyclerView, PieChart and BudgetRemaining with the new data
@@ -99,6 +100,11 @@ public class OverviewFragment extends Fragment
             // Update the PieChart
             updatePieChart(transactionList);
 
+            // Scroll back to the top of the RecyclerView to show the new transaction
+            if (rvPartialHistory.getLayoutManager() != null)
+            {
+                rvPartialHistory.getLayoutManager().scrollToPosition(0);
+            }
         });
 
 

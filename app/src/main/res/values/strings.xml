@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BudgetBuddy</string>
 
-    <!-- Fragment Titles-->
+    <!-- Titles-->
     <string name="add">Add</string>
     <string name="overview">Overview</string>
     <string name="transactions">Transactions</string>
@@ -15,6 +15,9 @@
     <string name="pound_sign">£</string>
     <string name="incoming">Incoming</string>
     <string name="outgoing">Outgoing</string>
+
+    <!-- Transaction Layout Strings -->
+    <string name="title_transaction_history">Transaction History</string>
 
     <!-- Default Category Strings -->
     <string name="default_category_petrol">Petrol</string>
@@ -39,4 +42,13 @@
     <string name="set_a_time">Set a Time</string>
     <string name="add_transaction">Add Transaction</string>
     <string name="recent_transactions">Recent Transactions</string>
+
+    <!--  Placeholder Strings  -->
+    <string name="placeholder_budget_amount">£527.01</string>
+    <string name="placeholder_date">12:34 12/3/2000</string>
+    <string name="placeholder_category">Entertainment</string>
+    <string name="placeholder_amount">+/£0.00</string>
+
+    <!--  Content Description Strings  -->
+    <string name="cd_remove_transaction">Remove Transaction</string>
 </resources>

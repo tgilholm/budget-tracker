@@ -202,6 +202,8 @@ public class AddFragment extends Fragment
 
     // Handle the logic for the add button
     // Collects all the user input into a new transaction
+    // TODO set character limits on fields
+    // TODO clear all fields on add
     public void onAddPressed(View view)
     {
         // Parcelable order:
