@@ -72,6 +72,15 @@ public class TransactionViewModel extends AndroidViewModel
         });
     }
 
+    // Publicly accessible method to remove a transaction from the DB
+    public void deleteTransaction(Transaction transaction)
+    {
+        executorService.execute(() -> {
+            transactionDAO.delete(transaction);
+            loadFromDB();
+        });
+    }
+
     // Load the transaction list with the one stored in the DB
     private void loadFromDB()
     {

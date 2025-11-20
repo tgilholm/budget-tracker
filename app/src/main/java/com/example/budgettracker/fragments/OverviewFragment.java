@@ -4,16 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.budgettracker.R;
 import com.example.budgettracker.Transaction;
@@ -21,7 +18,6 @@ import com.example.budgettracker.TransactionViewModel;
 import com.example.budgettracker.adapters.RecyclerViewAdapter;
 import com.example.budgettracker.utility.InputValidator;
 
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -31,9 +27,6 @@ import java.util.List;
 
 public class OverviewFragment extends Fragment
 {
-
-    // Create an instance of the TransactionViewModel
-    private TransactionViewModel transactionViewModel;
 
     // Create an instance of the RecyclerViewAdapter
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -70,7 +63,8 @@ public class OverviewFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         // Connect the TransactionViewModel to the same one in MainActivity
-        transactionViewModel = new ViewModelProvider(requireActivity()).get(TransactionViewModel.class);
+        // Create an instance of the TransactionViewModel
+        TransactionViewModel transactionViewModel = new ViewModelProvider(requireActivity()).get(TransactionViewModel.class);
 
         // Get the current Transaction list and convert it to a standard List
         List<Transaction> transactions = transactionViewModel.getTransactions().getValue();
@@ -78,13 +72,13 @@ public class OverviewFragment extends Fragment
         // Set up the recyclerViewAdapter with the current (sorted) transaction list
         if (transactions != null)
         {
-            recyclerViewAdapter = new RecyclerViewAdapter(InputValidator.sortTransactions(transactions));
+            recyclerViewAdapter = new RecyclerViewAdapter(InputValidator.sortTransactions(transactions), R.layout.transaction_item);
         }
 
         // Set up the recycler view
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(recyclerViewAdapter);
+        RecyclerView rvPartialHistory = view.findViewById(R.id.rvPartialHistory);
+        rvPartialHistory.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvPartialHistory.setAdapter(recyclerViewAdapter);
 
         // Set up an observer on the TransactionViewModel
         transactionViewModel.getTransactions().observe(getViewLifecycleOwner(), transactionList ->
@@ -93,19 +87,15 @@ public class OverviewFragment extends Fragment
 
             // Send the new (sorted) list to the recyclerViewAdapter
             recyclerViewAdapter.updateTransactions(InputValidator.sortTransactions(transactionList));
-            Log.v("OverviewFragment", String.valueOf(transactionList.size()));
-            Log.v("OverviewFragment", String.valueOf(recyclerViewAdapter.getItemCount()));
+
+            // Scroll back to the top of the RecyclerView to show the new transaction
+            if (rvPartialHistory.getLayoutManager() != null)
+            {
+                rvPartialHistory.getLayoutManager().scrollToPosition(0);
+            }
         });
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

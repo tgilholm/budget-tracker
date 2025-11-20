@@ -36,7 +36,7 @@
             android:layout_height="42dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="228dp"
-            android:text="£527.01"
+            android:text="@string/placeholder_budget_amount"
             android:textColor="@color/material_dynamic_neutral30"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pieChart" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvPartialHistory"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
@@ -89,7 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txtRecyclerViewLabel"
             app:layout_constraintVertical_bias="1.0"
             tools:itemCount="6"
-            tools:listitem="@layout/recycler_view_item">
+            tools:listitem="@layout/transaction_item">
 
 
         </androidx.recyclerview.widget.RecyclerView>
