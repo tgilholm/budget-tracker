@@ -296,6 +296,7 @@ public class AddFragment extends Fragment
         return InputValidator.validateDateTimeInput(getContext(), date + " " + time);
     }
 
+    // Get the repeat duration from the radio group
     private RepeatDuration getRepeatDuration()
     {
         // Get the radio group from the layout

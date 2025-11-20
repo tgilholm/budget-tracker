@@ -47,18 +47,19 @@
         <!-- TODO put pie chart & categories in a horizontal view -->
         <!-- Display the pie chart -->
 
-
-        <!-- Display the most recent transactions in a RecyclerView -->
-
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pieChart"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="175dp"
+            android:layout_height="175dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtRecyclerViewLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtBudgetAmount">
-
 
         </com.github.mikephil.charting.charts.PieChart>
 
@@ -74,6 +75,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pieChart" />
 
+
+        <!-- Display the most recent transactions in a RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPartialHistory"
             android:layout_width="0dp"
