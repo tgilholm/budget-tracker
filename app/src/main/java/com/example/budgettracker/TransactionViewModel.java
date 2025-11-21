@@ -2,6 +2,7 @@ package com.example.budgettracker;
 
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -72,6 +73,15 @@ public class TransactionViewModel extends AndroidViewModel
         });
     }
 
+    // Publicly accessible method to remove a transaction from the DB
+    public void deleteTransaction(Transaction transaction)
+    {
+        executorService.execute(() -> {
+            transactionDAO.delete(transaction);
+            loadFromDB();
+        });
+    }
+
     // Load the transaction list with the one stored in the DB
     private void loadFromDB()
     {
@@ -81,6 +91,7 @@ public class TransactionViewModel extends AndroidViewModel
 
             // Post the result to the main thread
             transactions.postValue(transactionList);
+            Log.v("TransactionViewModel", "loadFromDB called, size: " + transactionList.size());
 
         });
     }

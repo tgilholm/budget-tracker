@@ -15,6 +15,29 @@
 
         <!-- Create label to tell users what txtBudgetAmount is referring to -->
         <!-- TODO edit text colours -->
+
+        <LinearLayout
+            android:id="@id/pieChartContainer"
+            android:layout_width="match_parent"
+            android:layout_height="172dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtBudgetAmount">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start">
+
+            </com.github.mikephil.charting.charts.PieChart>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/txtBudgetLabel"
             android:layout_width="wrap_content"
@@ -36,7 +59,7 @@
             android:layout_height="42dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="228dp"
-            android:text="£527.01"
+            android:text="@string/placeholder_budget_amount"
             android:textColor="@color/material_dynamic_neutral30"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,21 +69,6 @@
 
         <!-- TODO put pie chart & categories in a horizontal view -->
         <!-- Display the pie chart -->
-
-
-        <!-- Display the most recent transactions in a RecyclerView -->
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pieChart"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtBudgetAmount">
-
-
-        </com.github.mikephil.charting.charts.PieChart>
 
         <TextView
             android:id="@+id/txtRecyclerViewLabel"
@@ -72,10 +80,12 @@
             android:textColor="@color/material_dynamic_neutral60"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pieChart" />
+            app:layout_constraintTop_toBottomOf="@+id/pieChartContainer" />
 
+
+        <!-- Display the most recent transactions in a RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvPartialHistory"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
@@ -89,7 +99,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txtRecyclerViewLabel"
             app:layout_constraintVertical_bias="1.0"
             tools:itemCount="6"
-            tools:listitem="@layout/recycler_view_item">
+            tools:listitem="@layout/transaction_item">
 
 
         </androidx.recyclerview.widget.RecyclerView>

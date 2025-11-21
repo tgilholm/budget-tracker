@@ -202,6 +202,8 @@ public class AddFragment extends Fragment
 
     // Handle the logic for the add button
     // Collects all the user input into a new transaction
+    // TODO set character limits on fields
+    // TODO clear all fields on add
     public void onAddPressed(View view)
     {
         // Parcelable order:
@@ -294,6 +296,7 @@ public class AddFragment extends Fragment
         return InputValidator.validateDateTimeInput(getContext(), date + " " + time);
     }
 
+    // Get the repeat duration from the radio group
     private RepeatDuration getRepeatDuration()
     {
         // Get the radio group from the layout
