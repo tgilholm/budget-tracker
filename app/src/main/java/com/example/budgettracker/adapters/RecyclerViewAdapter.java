@@ -11,14 +11,13 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgettracker.R;
-import com.example.budgettracker.Transaction;
+import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.enums.TransactionType;
 import com.example.budgettracker.utility.ColorHandler;
 import com.example.budgettracker.utility.Converters;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 // The adapter for the RecyclerView in OverviewFragment
 // Extends ListAdapter to improve performance- does not need to rewrite entire list on update

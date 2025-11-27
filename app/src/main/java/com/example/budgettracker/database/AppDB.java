@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.example.budgettracker.Transaction;
+import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.utility.Converters;
 
 @Database(entities = {Transaction.class}, version = 1, exportSchema = false)

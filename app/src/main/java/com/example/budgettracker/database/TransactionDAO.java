@@ -6,7 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.budgettracker.Transaction;
+import com.example.budgettracker.entities.Transaction;
 
 import java.util.List;
 

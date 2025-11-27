@@ -2,7 +2,7 @@ package com.example.budgettracker.utility;
 
 import java.util.Locale;
 
-// Handle string methods
+// Stateless utility class for string operations such as padding and formatting.
 public class StringUtils
 {
     private StringUtils() {}

@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.budgettracker.R;
-import com.example.budgettracker.Transaction;
+import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.utility.CalculationUtils;
 import com.example.budgettracker.utility.ColorHandler;
 import com.example.budgettracker.utility.Converters;

@@ -1,4 +1,4 @@
-package com.example.budgettracker;
+package com.example.budgettracker.entities;
 
 import java.util.Calendar;
 import java.util.Locale;

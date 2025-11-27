@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgettracker.R;
-import com.example.budgettracker.Transaction;
+import com.example.budgettracker.entities.Transaction;
 
 import java.util.List;
 

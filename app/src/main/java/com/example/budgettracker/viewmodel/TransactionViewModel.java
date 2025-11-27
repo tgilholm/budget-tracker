@@ -9,17 +9,15 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.budgettracker.Transaction;
+import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.database.AppDB;
 import com.example.budgettracker.database.TransactionDAO;
 import com.example.budgettracker.enums.TransactionType;
-import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -31,8 +29,8 @@ import java.util.concurrent.Executors;
  */
 
 /*
-All the database logic is handled within the TransactionView model
-Business logic including remaining budget is handled in the fragment
+All the database logic is handed to the TransactionRepository
+Business logic is delegated to the TransactionCalculator
  */
 public class TransactionViewModel extends AndroidViewModel
 {

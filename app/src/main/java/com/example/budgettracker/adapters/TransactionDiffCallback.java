@@ -2,7 +2,7 @@ package com.example.budgettracker.adapters;
 
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.example.budgettracker.Transaction;
+import com.example.budgettracker.entities.Transaction;
 
 import java.util.List;
 import java.util.Objects;
