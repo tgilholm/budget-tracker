@@ -31,4 +31,8 @@ public class Converters {
 
     }
 
+    public static String doubleToCurrencyString(double value) {
+        return String.format(Locale.getDefault(), "£%.2f", value);
+    }
+
 }

@@ -14,6 +14,7 @@ import com.example.budgettracker.R;
 import com.example.budgettracker.Transaction;
 import com.example.budgettracker.enums.TransactionType;
 import com.example.budgettracker.utility.ColorHandler;
+import com.example.budgettracker.utility.Converters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +95,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         {
             // Get the category and amount fields
             textCategory.setText(transaction.getCategory());
-            textAmount.setText(String.format(Locale.getDefault(), "£%.2f", transaction.getAmount()));
+            textAmount.setText(Converters.doubleToCurrencyString(transaction.getAmount()));
 
             // For positive (income) transactions, set the color to green
             if (transaction.getType() == TransactionType.INCOMING)

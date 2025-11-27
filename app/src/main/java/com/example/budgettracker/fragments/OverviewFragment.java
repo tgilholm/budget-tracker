@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.budgettracker.R;
 import com.example.budgettracker.Transaction;
 import com.example.budgettracker.utility.ColorHandler;
+import com.example.budgettracker.utility.Converters;
 import com.example.budgettracker.viewmodel.BudgetViewModel;
 import com.example.budgettracker.viewmodel.TransactionViewModel;
 import com.example.budgettracker.adapters.RecyclerViewAdapter;
@@ -46,80 +47,60 @@ import java.util.Map;
 
 public class OverviewFragment extends Fragment
 {
-
-    // Create an instance of the RecyclerViewAdapter
     private RecyclerViewAdapter recyclerViewAdapter;
 
     private PieChart pieChart;
 
     private TextView txtBudgetRemaining;
 
-    /* TODO: Update remaining budget
-    Update txtBudgetAmount when new transactions are added.
-    Subtract the total outgoings from the total budget to get the remaining budget
-     */
-
-    /* TODO: Pie-chart functionality
-    Pie charts will have colour-coded slices representing constituent categories
-    They will automatically calculate how much of the spending is taken up by which category
-    The user has the option to change the time span the average is taken from (default week)
-    Categories are then shown to the right of the pie chart, ordered by percentage
-     */
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
 
-        pieChart = view.findViewById(R.id.pieChart);    // Get the pie chart from the layout
-        setupPieChart();
+        // Get the Views from the layout
+        pieChart = view.findViewById(R.id.pieChart);                                // Get the pie chart from the layout
+        txtBudgetRemaining = view.findViewById(R.id.txtBudgetRemaining);            // Get the budget remaining text from the layout
+        RecyclerView rvPartialHistory = view.findViewById(R.id.rvPartialHistory);   // Get the recycler view from the layout
+        FloatingActionButton addButton = view.findViewById(R.id.overviewAddButton); // Get the FloatingActionButton from the layout
 
-        // This displays the remaining budget
-        txtBudgetRemaining = view.findViewById(R.id.txtBudgetRemaining);
+        setupPieChart();    // Set the PieChart styling options
 
-        // Create an instance of the BudgetViewModel
+
+        // Set up the Transaction and Budget ViewModels
         BudgetViewModel budgetViewModel = new ViewModelProvider(requireActivity()).get(BudgetViewModel.class);
-
-        // Create an instance of the TransactionViewModel
         TransactionViewModel transactionViewModel = new ViewModelProvider(requireActivity()).get(TransactionViewModel.class);
 
-        // Get the current Transaction list and convert it to a standard List
-        List<Transaction> transactions = transactionViewModel.getTransactions().getValue();
+
+        // Instantiate the RecyclerView with an empty list (the observer will update it)
+        recyclerViewAdapter = new RecyclerViewAdapter(new ArrayList<>(), R.layout.transaction_item);
+        rvPartialHistory.setLayoutManager(new LinearLayoutManager(getContext()));       // Use a vertical LinearLayout as the layout manager
+        rvPartialHistory.setAdapter(recyclerViewAdapter);                               // Connect to the recyclerViewAdapter
 
 
-        // Set up the recyclerViewAdapter with the current (sorted) transaction list
-        if (transactions != null)
-        {
-            recyclerViewAdapter = new RecyclerViewAdapter(InputValidator.sortTransactions(transactions), R.layout.transaction_item);
-        }
+        // Helper method to calculate the remaining budget
+        // The budget needs to be recalculated if either the budget changes or a new transaction is added
+        // This method is therefore able to be called in the observers for both values
+        Runnable updateRemainingBudget = () -> {
 
-        // Set up the recycler view
-        RecyclerView rvPartialHistory = view.findViewById(R.id.rvPartialHistory);
-        rvPartialHistory.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvPartialHistory.setAdapter(recyclerViewAdapter);
+            Double initialBudget = budgetViewModel.getBudget().getValue();                      // Get the user's budget from the ViewModel
+            List<Transaction> transactions = transactionViewModel.getTransactions().getValue(); // Get the list of transactions from the ViewModel
+
+            // If both values are non-null, recalculate the remaining budget
+            if (initialBudget != null && transactions != null) {
+                double budgetRemaining = calculateBudgetRemaining(initialBudget, transactions);
+                txtBudgetRemaining.setText(Converters.doubleToCurrencyString(budgetRemaining));
+            }
+        };
 
         // Set up an observer on the TransactionViewModel
-        // Updates the RecyclerView, PieChart and BudgetRemaining with the new data
+        // Updates the RecyclerView, PieChart and BudgetRemaining when a new transaction is loaded from the DB
         transactionViewModel.getTransactions().observe(getViewLifecycleOwner(), transactionList ->
         {
-            // When the transactionViewModel observes an update on transaction list, update the RecyclerView
-            // Send the new (sorted) list to the recyclerViewAdapter
-            recyclerViewAdapter.updateTransactions(InputValidator.sortTransactions(transactionList));
-
-            // Update the PieChart
-            updatePieChart(transactionList);
-
-
-            // TODO FIX THIS NIGHTMARE
-            // todo format budget remaining text to currency format
-            double budgetRemaining = calculateBudgetRemaining(
-                    budgetViewModel.getBudget().getValue(),
-                    transactionList);
-
-            // Update the budget remaining
-            txtBudgetRemaining.setText("£" + budgetRemaining);
-
-            updateBudgetRemainingText(view, txtBudgetRemaining, budgetRemaining);
+            recyclerViewAdapter.updateTransactions(InputValidator.sortTransactions(transactionList));   // Update the RecyclerView
+            updatePieChart(transactionList);    // Update the PieChart
+            updateRemainingBudget.run();        // Invoke the Runnable to update the remaining budget
 
             // Scroll back to the top of the RecyclerView to show the new transaction
             if (rvPartialHistory.getLayoutManager() != null)
@@ -129,8 +110,14 @@ public class OverviewFragment extends Fragment
         });
 
 
+        // Set up a listener on the Budget variable and invoke the Runnable when changes are detected
+        budgetViewModel.getBudget().observe(getViewLifecycleOwner(), budget ->
+        {
+            updateRemainingBudget.run();
+        });
+
+
         // Set up the FloatingActionButton to direct the user to the Add Fragment
-        FloatingActionButton addButton = view.findViewById(R.id.overviewAddButton);
         addButton.setOnClickListener(v ->
         {
             Bundle bundle = new Bundle();
@@ -140,9 +127,6 @@ public class OverviewFragment extends Fragment
             getParentFragmentManager().setFragmentResult("addPage", new Bundle());
 
         });
-
-
-
     }
 
 
@@ -326,21 +310,20 @@ public class OverviewFragment extends Fragment
     // Takes the list of transactions and recalculates the budget remaining
     // Subtracts all negative transactions and adds positive ones
     //TODO filter by date and time
-    private double calculateBudgetRemaining(double startingBudget, List<Transaction> transactions) {
+    private double calculateBudgetRemaining(double start, List<Transaction> transactions) {
 
-        double budgetResult = startingBudget;
+        double result = start;
         for (Transaction t : transactions)
         {
             // Subtract outgoings
             if (t.getType() == TransactionType.OUTGOING){
-                budgetResult -= t.getAmount();
+                result -= t.getAmount();
             }
             // Add incoming
             else {
-                budgetResult += t.getAmount();
+                result += t.getAmount();
             }
         }
-
-        return budgetResult;
+        return result;
     }
 }

@@ -59,7 +59,7 @@ public class TransactionsFragment extends Fragment
         {
 
 
-        }
+        });
 
 
         // Connect the transactionViewModel
