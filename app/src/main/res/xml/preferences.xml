@@ -2,28 +2,20 @@
 <androidx.preference.PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <!-- Determines the layout of the SettingsFragment -->
+    <!-- Also acts to store the default values of each Preference -->
     <androidx.preference.PreferenceCategory android:title="General Settings">
 
-        <androidx.preference.Preference
-            android:key="general_settings_key"
-            android:title="Preference Test" />
-
-        <androidx.preference.SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:key="switch_settings_key"
-            android:title="Switch" />
-
-    </androidx.preference.PreferenceCategory>
-
-
-    <androidx.preference.PreferenceCategory android:title="Other">
-
-        <androidx.preference.Preference
-            android:key="about_settings_key"
-            android:title="About Me" />
-
+        <!-- An EditTextPreference to select the budget -->
+        <!-- This opens a prompt where the user can type in a budget amount -->
+        <!-- Stores the default budget as a float with value 0 -->
+        <EditTextPreference
+            android:key="budget"
+            android:title="Edit budget"
+            android:defaultValue="0"
+            android:inputType="numberDecimal"/>
 
     </androidx.preference.PreferenceCategory>
-
 
 </androidx.preference.PreferenceScreen>

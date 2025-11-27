@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.budgettracker.R;
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         setContentView(R.layout.activity_main);
         EdgeToEdge.enable(this);
+
+        // Set the default preferences for the app
+        PreferenceManager.setDefaultValues(this, "appPreferences", Context.MODE_PRIVATE, R.xml.preferences, true);
 
         // Get an instance of the BudgetViewModel
         budgetViewModel = new ViewModelProvider(this).get(BudgetViewModel.class);

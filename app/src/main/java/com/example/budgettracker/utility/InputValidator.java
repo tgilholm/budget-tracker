@@ -24,18 +24,18 @@ import java.util.Locale;
 
 public final class InputValidator
 {
+    // Todo change input validation methods to be more re-usable
 
-    // Rejects empty strings and those not matching the regex
-    // Takes a context parameter for toast and a String input to validate
-    public static double validateCurrencyInput(Context context, String input)
+    // Takes input to validate and context to pass to toast for error communication
+    // Returns false for empty strings or non-matching strings and true otherwise
+    public static boolean validateCurrencyInput(Context context, String input)
     {
-
         // Verify format is correct, inform user via toasts about any errors
-        // Check if amountText is empty- this is also validated by the regex but is more specific
+        // Check if amountText is empty before proceeding
         if (input.isEmpty())
         {
             Toast.makeText(context, "Please enter a currency value", Toast.LENGTH_SHORT).show();
-            return -1; // -1 is the "error code"
+            return false;
         }
 
         // Regular expression for checking amount format is correct
@@ -55,21 +55,21 @@ public final class InputValidator
         if (!(input.matches(regex)))
         {
             Toast.makeText(context, "Please enter a currency value in the format '123' or '123.45'", Toast.LENGTH_LONG).show();
-            return -1;
+            return false;
         }
 
-        // If the string is formatted correctly, return it
         // Put the return in a try-catch in case the user tries any funny business not caught by the regex
         try
         {
-            return Double.parseDouble(input); // Return the amount as a double
+            return true; // Return true if correctly formatted
         } catch (NumberFormatException funnyBusiness)
         {
             Toast.makeText(context, "Error getting currency value", Toast.LENGTH_LONG).show();
             Log.e("InputValidator Error: ", funnyBusiness.toString());
-            return -1;
+            return false;
         }
     }
+
 
     // Takes two String parameters, dateInput and timeInput and attempts to parse them into a Calendar object
     public static Calendar validateDateTimeInput(Context context, String dateTimeInput)

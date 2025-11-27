@@ -245,7 +245,13 @@ public class AddFragment extends Fragment
         String amount = amountText.getText().toString().trim(); // Remove any whitespace
 
         // Validate the input
-        return InputValidator.validateCurrencyInput(getContext(), amount);
+        if (InputValidator.validateCurrencyInput(getContext(), amount)) {
+            return Double.parseDouble(amount);
+        }
+        else {
+            Log.v("AddFragment", "Invalid amount input");
+            return 0;
+        }
     }
 
     // Return the type of the transaction- incoming or outgoing

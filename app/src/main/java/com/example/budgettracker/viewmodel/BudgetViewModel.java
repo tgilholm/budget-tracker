@@ -32,7 +32,8 @@ public class BudgetViewModel extends AndroidViewModel {
     // Retrieve the "budget" field from the SharedPreferences
     private double getBudgetFromPrefs()
     {
-        return prefs.getFloat("budget", 0); // default to 0
+        // preferences.xml always stores the budget as a string
+        return Double.parseDouble(prefs.getString("budget", "0")); // default to 0
     }
 
     // Return the value of the budget
@@ -42,7 +43,7 @@ public class BudgetViewModel extends AndroidViewModel {
 
     public void setBudget(double _budget) {
         // Take a double parameter and set the "budget" field in app preferences
-        prefsEditor.putFloat("budget", (float)_budget);
+        prefsEditor.putString("budget", "" + _budget);
         prefsEditor.apply();
         getBudgetFromPrefs();
     }
