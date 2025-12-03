@@ -7,14 +7,19 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.example.budgettracker.entities.Category;
 import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.utility.Converters;
 
-@Database(entities = {Transaction.class}, version = 1, exportSchema = false)
+@Database(entities = {Transaction.class, Category.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDB extends RoomDatabase
 {
+    // Abstract access to the DAOs
     public abstract TransactionDAO transactionDAO();
+
+    public abstract CategoryDAO categoryDAO();
+
 
     // Define the instance of the Database as volatile to ensure all fragments receive updates
     // The DB_INSTANCE is defined "static" so only one instance exists across the application

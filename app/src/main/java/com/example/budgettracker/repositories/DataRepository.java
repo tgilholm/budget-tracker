@@ -1,14 +1,13 @@
 package com.example.budgettracker.repositories;
 
 import android.app.Application;
-import android.provider.ContactsContract;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.budgettracker.database.AppDB;
+import com.example.budgettracker.database.CategoryDAO;
 import com.example.budgettracker.database.TransactionDAO;
+import com.example.budgettracker.entities.Category;
 import com.example.budgettracker.entities.Transaction;
 
 import java.util.List;
@@ -20,31 +19,26 @@ import java.util.concurrent.Executors;
 // Transaction, Overview and Add fragments interact with the DataRepository via UseCases
 // The repository interacts with both the Transaction and Category tables (not User)
 // Follows a singleton pattern to only permit ONE instance of the repository
-public class DataRepository
-{
+public class DataRepository {
     private final TransactionDAO transactionDAO;  // Holds an instance of the transactionDAO
-    //private final CategoryDAO categoryDAO;  // Holds an instance of the categoryDAO
+    private final CategoryDAO categoryDAO;  // Holds an instance of the categoryDAO
     private final ExecutorService executorService; // Uses executorService to delegate DB operations to a thread pool
     private static volatile DataRepository INSTANCE;    // The only instance of DataRepository
 
     // Constructor
-    private DataRepository(Application application)
-    {
+    private DataRepository(Application application) {
         AppDB appDB = AppDB.getDBInstance(application); // Get an instance of the database
 
-        // Initialise the DAO and executorService
+        // Initialise the DAOs and executorService
         transactionDAO = appDB.transactionDAO();
+        categoryDAO = appDB.categoryDAO();
         executorService = Executors.newSingleThreadExecutor();
     }
 
-    public static DataRepository getInstance(Application application)
-    {
-        if (INSTANCE == null)
-        {
-            synchronized (DataRepository.class)
-            {
-                if (INSTANCE == null)
-                {
+    public static DataRepository getInstance(Application application) {
+        if (INSTANCE == null) {
+            synchronized (DataRepository.class) {
+                if (INSTANCE == null) {
                     INSTANCE = new DataRepository(application);
                 }
             }
@@ -52,22 +46,33 @@ public class DataRepository
         return INSTANCE;
     }
 
-
     // TransactionDAO interface methods
-    public LiveData<List<Transaction>> getAllTransactions()
-    {
+    public LiveData<List<Transaction>> getAllTransactions() {
         return transactionDAO.getAll();
     }
 
-    public void insertTransaction(Transaction transaction)
-    {
+    public void insertTransaction(Transaction transaction) {
         // Run in a separate thread
         executorService.execute(() -> transactionDAO.insertTransaction(transaction));
     }
 
-    public void delete(Transaction transaction)
-    {
+    public void deleteTransaction(Transaction transaction) {
         executorService.execute(() -> transactionDAO.delete(transaction));
+    }
+
+
+    // CategoryDAO interface methods
+    public LiveData<List<Category>> getAllCategories() {
+        return categoryDAO.getAll();
+    }
+
+    public void insertCategory(Category category) {
+        executorService.execute(() -> categoryDAO.insertCategory(category));
+    }
+
+    public void deleteCategory(Category category)
+    {
+        executorService.execute(() -> categoryDAO.delete(category));
     }
 
 }

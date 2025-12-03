@@ -27,8 +27,7 @@ import com.example.budgettracker.enums.TransactionType;
 // Also acts as an entity in the Room Database
 
 @Entity(tableName = "transaction")
-public final class Transaction
-{
+public final class Transaction {
     // Use a static field for the nextID parameter
     /*
     Each of the Transactions has access to the exact same copy of nextID, as it only exists once in memory
@@ -49,7 +48,7 @@ public final class Transaction
     @ColumnInfo(name = "type")
     private final TransactionType type;
 
-    @ColumnInfo(name = "datetime" )
+    @ColumnInfo(name = "datetime")
     private final Calendar dateTime;
 
     @ColumnInfo(name = "category")
@@ -58,8 +57,7 @@ public final class Transaction
     @ColumnInfo(name = "repeat")
     private final RepeatDuration repeatDuration;
 
-    public Transaction(double amount, TransactionType type, Calendar dateTime, String category, RepeatDuration repeatDuration)
-    {
+    public Transaction(double amount, TransactionType type, Calendar dateTime, String category, RepeatDuration repeatDuration) {
         // ID has a fixed width of 4
         this.id = String.format(Locale.getDefault(), "%04d", nextID++); // Increment the ID counter by 1
         this.amount = amount;
@@ -71,59 +69,51 @@ public final class Transaction
 
     // Getter methods
     @NonNull
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    public double getAmount()
-    {
+    public double getAmount() {
         return amount;
     }
 
-    public TransactionType getType()
-    {
+    public TransactionType getType() {
         return type;
     }
 
     // Returns date and time as a Calendar object
-    public Calendar getDateTime()
-    {
+    public Calendar getDateTime() {
         return dateTime;
     }
 
     // Returns the date and time in the format hh:mm dd/MM/yyyy
-    public String getDateTimeString()
-    {
+    public String getDateTimeString() {
         return String.format(Locale.getDefault(), "%02d:%02d %02d/%02d/%d",
                 dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE),
                 dateTime.get(Calendar.DAY_OF_MONTH), dateTime.get(Calendar.MONTH) + 1, dateTime.get(Calendar.YEAR));
     }
 
-    public String getCategory()
-    {
+    public String getCategory() {
         return category;
     }
 
-    public RepeatDuration getRepeatDuration()
-    {
+    public RepeatDuration getRepeatDuration() {
         return repeatDuration;
     }
 
     // toString method: Outputs an abridged version of a transaction
     @NonNull
-    public String toString()
-    {
+    public String toString() {
         return String.format(Locale.getDefault(), "ID: %s, Amount: %.2f, Type: %s, Date: %s", id, amount, type, dateTime.toString());
     }
 
     // Used to compare one Transaction with another
     // By default equals() checks if memory locations are the same
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true; // Check if the two objects are exactly the same in memory
-        if (o == null || getClass() != o.getClass()) return false; // Check if the other object is not a Transaction or is null
+        if (o == null || getClass() != o.getClass())
+            return false; // Check if the other object is not a Transaction or is null
 
         Transaction x = (Transaction) o; // Cast o to transaction- only executed if the last check succeeded
         // Each transaction will have a different time stamp, so this is used for comparisons

@@ -32,6 +32,6 @@ public class TransactionViewModel extends AndroidViewModel {
     // Delete a transaction
     public void deleteTransaction(Transaction transaction)
     {
-        dataRepository.delete(transaction);
+        dataRepository.deleteTransaction(transaction);
     }
 }

@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.budgettracker.R;
 import com.example.budgettracker.utility.InputValidator;
 import com.example.budgettracker.viewmodel.BudgetViewModel;
+import com.example.budgettracker.viewmodel.StartupViewModel;
 
 // The FirstTimeStartup activity handles the case where the
 // "notFirstRun" flag is false in the Preferences
@@ -40,6 +41,11 @@ public class FirstTimeStartupActivity extends AppCompatActivity {
 
         // Get an instance of the BudgetViewModel
         budgetViewModel = new ViewModelProvider(this).get(BudgetViewModel.class);
+
+        // Add the default categories to the database
+        StartupViewModel startupViewModel = new ViewModelProvider(this).get(StartupViewModel.class);
+        startupViewModel.addDefaultCategories();
+
     }
 
     // Handle the button press with input validation

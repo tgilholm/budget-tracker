@@ -23,7 +23,7 @@ public interface TransactionDAO {
 
     // Returns only the transaction matching the provided transaction ID
     @Query("SELECT * FROM 'transaction' WHERE id = (:id)")
-    Transaction getTransactionByID(int id);
+    Transaction getTransactionByID(String id);
 
     // Ellipsis after the parameter allows adding any number of transactions
     @Insert

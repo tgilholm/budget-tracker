@@ -44,10 +44,6 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.recyclerview)
 
-    // DataStore dependencies
-    implementation("androidx.datastore:datastore-preferences:1.0.0") // base functionality
-    implementation("androidx.datastore:datastore-preferences-rxjava2:1.0.0") // java instead of kotlin
-
     // Preference Fragment dependency
     implementation("androidx.preference:preference:1.2.1")
 

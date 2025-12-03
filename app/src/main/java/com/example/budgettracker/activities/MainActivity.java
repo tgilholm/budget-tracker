@@ -31,12 +31,9 @@ import com.google.android.material.tabs.TabLayoutMediator;
  *  Fragments are attached to MainActivity- the layout in activity_main.xml is shown behind them
  *  Attaches these to a TabLayout to enable the user to switch between the three tabs without swiping
  *  Title bar is automatically updated to reflect fragment title
- *
- *
  */
 
 public class MainActivity extends AppCompatActivity {
-
     OverviewViewModel overviewViewModel;
     BudgetViewModel budgetViewModel;
 
