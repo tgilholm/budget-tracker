@@ -41,11 +41,6 @@ public class FirstTimeStartupActivity extends AppCompatActivity {
 
         // Get an instance of the BudgetViewModel
         budgetViewModel = new ViewModelProvider(this).get(BudgetViewModel.class);
-
-        // Add the default categories to the database
-        StartupViewModel startupViewModel = new ViewModelProvider(this).get(StartupViewModel.class);
-        startupViewModel.addDefaultCategories();
-
     }
 
     // Handle the button press with input validation
