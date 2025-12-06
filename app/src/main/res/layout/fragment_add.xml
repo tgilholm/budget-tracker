@@ -64,9 +64,12 @@
 
                 <!-- User input for amount field -->
                 <!-- Restricted to one line and 32 chars -->
+                <!-- android:ems is used as a "hacky" way of setting max width -->
+                <!-- while allowing an edittext to expand beyond the text within it -->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextAmount"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:ems="20"
                     android:layout_height="48dp"
                     android:hint="@string/hint_amount"
                     android:inputType="number"
@@ -120,7 +123,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextDate"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:ems="20"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:focusable="false"
@@ -132,7 +136,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextTime"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:ems="20"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:focusable="false"
@@ -233,12 +238,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/rb_year" />
             </RadioGroup>
-
-
         </LinearLayout>
-
-
     </LinearLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addButton"
@@ -254,7 +256,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        tools:ignore="ClassNameCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
