@@ -10,6 +10,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.example.budgettracker.R;
 import com.example.budgettracker.utility.InputValidator;
 
+// todo refactor to use fragment within main activity
+
 // Provides functionality to the layout items
 public class SettingsFragment extends PreferenceFragmentCompat
 {

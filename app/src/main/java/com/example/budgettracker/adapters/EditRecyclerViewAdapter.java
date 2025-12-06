@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgettracker.R;
 import com.example.budgettracker.entities.Transaction;
+import com.example.budgettracker.entities.TransactionWithCategory;
 
 import java.util.List;
 
@@ -19,11 +20,11 @@ public class EditRecyclerViewAdapter extends RecyclerViewAdapter{
 
     // Define a publicly accessible onDeleteCicked method through an interface
     public interface OnDeleteClickListener {
-        void onDeleteClicked(Transaction transaction);
+        void onDeleteClicked(TransactionWithCategory transaction);
     }
     private final OnDeleteClickListener onDeleteClickListener;
 
-    public EditRecyclerViewAdapter(List<Transaction> transactions, OnDeleteClickListener onDeleteClickListener, int resource)
+    public EditRecyclerViewAdapter(List<TransactionWithCategory> transactions, OnDeleteClickListener onDeleteClickListener, int resource)
     {
         super(transactions, resource);
         this.onDeleteClickListener = onDeleteClickListener;
@@ -61,7 +62,7 @@ public class EditRecyclerViewAdapter extends RecyclerViewAdapter{
         }
 
         @Override
-        public void bind(Transaction transaction) {
+        public void bind(TransactionWithCategory transaction) {
             super.bind(transaction);        // Call the bind method in RecyclerViewAdapter
 
 
@@ -72,15 +73,15 @@ public class EditRecyclerViewAdapter extends RecyclerViewAdapter{
 
         }
 
-        private void setDeleteButton(ImageButton deleteButton, Transaction transaction) {
+        private void setDeleteButton(ImageButton deleteButton, TransactionWithCategory transactionWithCategory) {
             deleteButton.setOnClickListener(view ->
             {
                 int position = getBindingAdapterPosition();
 
                 if (position != RecyclerView.NO_POSITION  && onDeleteClickListener != null)
                 {
-                    onDeleteClickListener.onDeleteClicked(transaction);
-                    Log.v("EditRecyclerViewAdapter", "Deleting transaction " + transaction.getId());
+                    onDeleteClickListener.onDeleteClicked(transactionWithCategory);
+                    Log.v("EditRecyclerViewAdapter", "Deleting transaction " + transactionWithCategory.transaction.getId());
 
                     // Refresh the RecyclerView
                     notifyItemRemoved(position);

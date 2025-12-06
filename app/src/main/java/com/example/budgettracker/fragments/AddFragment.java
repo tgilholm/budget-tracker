@@ -1,7 +1,6 @@
 package com.example.budgettracker.fragments;
 
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,7 +31,6 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -130,32 +128,33 @@ public class AddFragment extends Fragment {
     }
 
     // Populate the ChipGroup with categories
-    private void populateChipGroup(List<Category> categories) {
+    private void populateChipGroup(@NonNull List<Category> categories) {
         // Replace the chips with new ones
         chipGroupCategories.removeAllViews();
 
         // Add the new chips
         for (Category c : categories)
         {
-            chipGroupCategories.addView(createChip(
-                    c.getName(),
-                    ColorHandler.resolveColorID(getContext(), c.getColorID())
-            ));
+            chipGroupCategories.addView(createChip(c));
         }
     }
 
-    // Allows for the creation of default and user-defined category chips //TODO Add color picker
+    // Takes a category and generates a chip //TODO Add color picker
     @NonNull
-    private Chip createChip(String label, ColorStateList color) {
+    private Chip createChip(@NonNull Category category) {
         Chip chip = new Chip(getContext(), null, R.style.Theme_BudgetTracker_ChipStyle);
 
-        // Set the name of the chip
-        chip.setText(label);
+        // Set the name of the chip to the category name
+        chip.setText(category.getName());
         chip.setCheckable(true);
         chip.setClickable(true);
 
-        // Set the background color of the chip
-        chip.setChipBackgroundColor(color);
+        // Set the background color of the chip top the category's colour
+        chip.setChipBackgroundColor(ColorHandler.resolveColorID(getContext(), category.getColorID()));
+
+        // Set the "tag" parameter of the Chip to the category ID
+        // This facilitates the category selection logic
+        chip.setTag(category.getCategoryID());
         return chip;
     }
 
@@ -213,17 +212,17 @@ public class AddFragment extends Fragment {
             return;
         }     // Break here if getDateAndTime() failed
 
-        String category = getCategory();    // Get the transaction category
-        if (category == null) {
+        long categoryID = getCategoryID();    // Get the transaction category
+        if (categoryID < 0) {
             return;
-        }     // Break here if getCategory() failed
+        }     // Break here if getCategoryID() failed
 
         RepeatDuration repeatDuration = getRepeatDuration();
 
         Log.v("AddFragment", "Adding new transaction");
 
         // Send the transaction details to the ViewModel
-        addViewModel.addTransaction(amount, type, dateTime, category, repeatDuration);
+        addViewModel.addTransaction(amount, type, dateTime, categoryID, repeatDuration);
 
         // Inform the user via a toast that the transaction was added
         Toast.makeText(getContext(), "Added new transaction!", Toast.LENGTH_SHORT).show();
@@ -259,8 +258,7 @@ public class AddFragment extends Fragment {
     }
 
     // Return the category of the transaction
-    @Nullable
-    private String getCategory() {
+    private long getCategoryID() {
         // The ChipGroup uses Single Selection mode, making the process of finding the checked chip faster
         int selectedChipId = chipGroupCategories.getCheckedChipId();
 
@@ -268,11 +266,11 @@ public class AddFragment extends Fragment {
         if (selectedChipId == View.NO_ID) // View.NO_ID has a value of -1
         {
             Toast.makeText(getContext(), "No Category Selected!", Toast.LENGTH_SHORT).show();
-            return null; // Return null if no chip is selected
+            return 0; // Return null if no chip is selected
         } else {
-            // Returns the chip with the ID of the selected chip
+            // Return the tag property of the selected chip
             Chip selectedCategory = chipGroupCategories.findViewById(selectedChipId);
-            return selectedCategory.getText().toString(); // Returns the text of the chip
+            return (long) selectedCategory.getTag();
         }
     }
 

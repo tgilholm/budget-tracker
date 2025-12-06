@@ -7,7 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.budgettracker.entities.Category;
 import com.example.budgettracker.entities.Transaction;
+import com.example.budgettracker.entities.TransactionWithCategory;
 import com.example.budgettracker.enums.TransactionType;
 import com.example.budgettracker.repositories.DataRepository;
 
@@ -31,7 +33,7 @@ public class OverviewViewModel extends AndroidViewModel
 
 
     // Exposes the LiveData version of the transaction list to the fragments
-    public LiveData<List<Transaction>> getTransactions()
+    public LiveData<List<TransactionWithCategory>> getTransactions()
     {
         return dataRepository.getAllTransactions();
     }
@@ -40,7 +42,7 @@ public class OverviewViewModel extends AndroidViewModel
 
 
     // Groups categories into top-n and group the rest into "other"
-    public Map<String, Double> getTopNCategoryTotals(List<Transaction> transactions, int n)
+    public Map<String, Double> getTopNCategoryTotals(List<TransactionWithCategory> transactions, int n)
     {
         Map<String, Double> totalPerCategory = getCategoryTotals(transactions); // Get the total per category
 
@@ -74,7 +76,7 @@ public class OverviewViewModel extends AndroidViewModel
     // Aggregates transactions into a map of Amount and Category
     // Map does not allow duplicate keys so it is the ideal choice
     @NonNull
-    public static Map<String, Double> getCategoryTotals(List<Transaction> transactions)
+    public static Map<String, Double> getCategoryTotals(List<TransactionWithCategory> transactions)
     {
         Map<String, Double> totalPerCategory = new HashMap<>();
 
@@ -84,25 +86,26 @@ public class OverviewViewModel extends AndroidViewModel
         }
 
         // Put the transactions into the Map
-        for (Transaction t : transactions)
+        for (TransactionWithCategory t : transactions)
         {
-            String category = t.getCategory();
-            double amount = t.getAmount();
+            Transaction transaction = t.transaction;
+            Category category = t.category;
+            double amount = transaction.getAmount();
 
             // Only handles "outgoing" transactions
-            if (t.getType() == TransactionType.OUTGOING)
+            if (transaction.getType() == TransactionType.OUTGOING)
             {
                 // Uses Map.merge() instead of if-else statements
                 // Adds the amount to the total if the category already exists in the map
                 // Otherwise, adds the category to the map with amount as the value
-                totalPerCategory.merge(category, amount, Double::sum);
+                totalPerCategory.merge(category.getName(), amount, Double::sum);
             }
         }
         return totalPerCategory;
     }
 
     // Calculate the remaining budget given a starting amount
-    public double getBudgetRemaining(double start, List<Transaction> transactions)
+    public double getBudgetRemaining(double start, List<TransactionWithCategory> transactions)
     {
         if (transactions == null)
         {
@@ -110,30 +113,32 @@ public class OverviewViewModel extends AndroidViewModel
         }
 
         double result = start;
-        for (Transaction t : transactions)
+        for (TransactionWithCategory t : transactions)
         {
-            if (t.getType() == TransactionType.OUTGOING)
+            Transaction transaction = t.transaction;
+            if (transaction.getType() == TransactionType.OUTGOING)
             {
-                result -= t.getAmount();            // Subtract outgoings
+                result -= transaction.getAmount();            // Subtract outgoings
             } else
             {
-                result += t.getAmount();            // Add incoming
+                result += transaction.getAmount();            // Add incoming
             }
         }
         return result;
     }
 
     // Calculates the amount spent across all outgoing transactions
-    public double getTotalSpend(List<Transaction> transactions)
+    public double getTotalSpend(List<TransactionWithCategory> transactions)
     {
         double total = 0;
         if (transactions != null )
         {
-            for (Transaction t : transactions)
+            for (TransactionWithCategory t : transactions)
             {
-                if (t.getType() == TransactionType.OUTGOING)
+                Transaction transaction = t.transaction;
+                if (transaction.getType() == TransactionType.OUTGOING)
                 {
-                    total += t.getAmount();
+                    total += transaction.getAmount();
                 }
             }
         }

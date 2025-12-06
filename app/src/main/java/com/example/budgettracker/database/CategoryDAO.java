@@ -19,9 +19,9 @@ public interface CategoryDAO
     @Query("SELECT * FROM 'category'")
     LiveData<List<Category>> getAll();
 
-    // Return a specific category
-    @Query("SELECT * FROM 'category' WHERE id = (:id)")
-    Category getCategoryByID(String id);
+    // Get a category by ID
+    @Query("SELECT * FROM 'category' WHERE categoryID = (:id)")
+    Category getCategoryByID(long id);
 
     // Add a new category
     @Insert

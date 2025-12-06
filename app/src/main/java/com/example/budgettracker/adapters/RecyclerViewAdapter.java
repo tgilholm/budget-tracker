@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgettracker.R;
+import com.example.budgettracker.entities.Category;
 import com.example.budgettracker.entities.Transaction;
+import com.example.budgettracker.entities.TransactionWithCategory;
 import com.example.budgettracker.enums.TransactionType;
 import com.example.budgettracker.utility.ColorHandler;
 import com.example.budgettracker.utility.Converters;
@@ -27,10 +29,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @LayoutRes
     protected final int resource;
 
-    // Hold a list of transactions
-    protected final List<Transaction> _transactions = new ArrayList<>();
+    // Hold a list of transaction-category objects
+    protected final List<TransactionWithCategory> _transactions = new ArrayList<>();
 
-    public RecyclerViewAdapter(List<Transaction> transactions, @LayoutRes int resource)
+    public RecyclerViewAdapter(List<TransactionWithCategory> transactions, @LayoutRes int resource)
     {
         this._transactions.addAll(transactions);    // Instantiate list with transactions
         this.resource = resource;                   // Instantiate layout
@@ -48,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
-        Transaction transaction = _transactions.get(position);    // Get the transaction at the current position
+        TransactionWithCategory transaction = _transactions.get(position);    // Get the object at the current position
         holder.bind(transaction);   // Set the data in the view elements
     }
 
@@ -59,7 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     // Update a transaction without resetting the entire RecyclerView using DiffUtil
-    public void updateTransactions(List<Transaction> transactions)
+    public void updateTransactions(List<TransactionWithCategory> transactions)
     {
         // Compare the list held in the Adapter with the new list
         final TransactionDiffCallback diffCallback = new TransactionDiffCallback(this._transactions, transactions);
@@ -90,14 +92,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
         // Set layout elements to the transaction data
-        public void bind(Transaction transaction)
+        public void bind(TransactionWithCategory transactionWithCategory)
         {
-            // Get the category and amount fields
-            textCategory.setText(transaction.getCategory());
-            textAmount.setText(Converters.doubleToCurrencyString(transaction.getAmount()));
+            // Extract the transaction and category from the parameter
+            Transaction t = transactionWithCategory.transaction;
+            Category c = transactionWithCategory.category;
+
+            // Set the category and amount fields
+            textCategory.setText(c.getName());
+            textAmount.setText(Converters.doubleToCurrencyString(t.getAmount()));
 
             // For positive (income) transactions, set the color to green
-            if (transaction.getType() == TransactionType.INCOMING)
+            if (t.getType() == TransactionType.INCOMING)
             {
                 textAmount.setTextColor(ColorHandler.resolveColorID(itemView.getContext(), R.color.brightGreen));
             } else
@@ -107,7 +113,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 textAmount.setText(negatedString);
                 textAmount.setTextColor(ColorHandler.resolveColorID(itemView.getContext(), R.color.brightRed));
             }
-            textDateTime.setText(transaction.getDateTimeString());
+            textDateTime.setText(t.getDateTimeString());
         }
     }
 }

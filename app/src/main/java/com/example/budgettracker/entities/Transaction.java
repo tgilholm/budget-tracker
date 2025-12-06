@@ -38,9 +38,8 @@ public final class Transaction {
      */
     private static long nextID;
 
-    @NonNull
     @PrimaryKey
-    private String id;
+    private long id;
 
     @ColumnInfo(name = "amount")
     private final double amount;
@@ -52,24 +51,23 @@ public final class Transaction {
     private final Calendar dateTime;
 
     @ColumnInfo(name = "category")
-    private final String category;
+    private final long categoryID;
 
     @ColumnInfo(name = "repeat")
     private final RepeatDuration repeatDuration;
 
-    public Transaction(double amount, TransactionType type, Calendar dateTime, String category, RepeatDuration repeatDuration) {
+    public Transaction(double amount, TransactionType type, Calendar dateTime, long categoryID, RepeatDuration repeatDuration) {
         // ID has a fixed width of 4
-        this.id = String.format(Locale.getDefault(), "%04d", nextID++); // Increment the ID counter by 1
+        this.id = nextID++; // Increment the ID counter by 1
         this.amount = amount;
         this.type = type;
         this.dateTime = dateTime;
-        this.category = category;
+        this.categoryID = categoryID;
         this.repeatDuration = repeatDuration;
     }
 
     // Getter methods
-    @NonNull
-    public String getId() {
+    public long getId() {
         return id;
     }
 
@@ -93,8 +91,8 @@ public final class Transaction {
                 dateTime.get(Calendar.DAY_OF_MONTH), dateTime.get(Calendar.MONTH) + 1, dateTime.get(Calendar.YEAR));
     }
 
-    public String getCategory() {
-        return category;
+    public long getCategoryID() {
+        return categoryID;
     }
 
     public RepeatDuration getRepeatDuration() {
@@ -125,10 +123,10 @@ public final class Transaction {
     @Override
     public int hashCode() {
         // Generates a unique hashcode for this object using all of its fields
-        return Objects.hash(id, amount, type, dateTime, category, repeatDuration);
+        return Objects.hash(id, amount, type, dateTime, categoryID, repeatDuration);
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(long  id) {
         this.id = id;
     }
 }

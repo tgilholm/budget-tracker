@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.budgettracker.R;
 import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.adapters.EditRecyclerViewAdapter;
+import com.example.budgettracker.entities.TransactionWithCategory;
 import com.example.budgettracker.utility.InputValidator;
 import com.example.budgettracker.viewmodel.TransactionViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -57,7 +58,7 @@ public class TransactionsFragment extends Fragment
         TransactionViewModel transactionViewModel = new ViewModelProvider(requireActivity()).get(TransactionViewModel.class);
 
         // Empty List to instantiate the RecyclerView
-        List<Transaction> emptyList = new ArrayList<>();
+        List<TransactionWithCategory> emptyList = new ArrayList<>();
 
         // Set up the editRecyclerViewAdapter
         EditRecyclerViewAdapter editRecyclerViewAdapter = new EditRecyclerViewAdapter(

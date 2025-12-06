@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.budgettracker.R;
 import com.example.budgettracker.entities.Transaction;
+import com.example.budgettracker.entities.TransactionWithCategory;
 import com.example.budgettracker.utility.CalculationUtils;
 import com.example.budgettracker.utility.ColorHandler;
 import com.example.budgettracker.utility.Converters;
@@ -104,7 +105,7 @@ public class OverviewFragment extends Fragment
         // Set up a listener on the Budget variable and invoke the method when changes are detected
         budgetViewModel.getBudget().observe(getViewLifecycleOwner(), budget -> {
             // Get the transaction list
-            List<Transaction> transactions = overviewViewModel.getTransactions().getValue();
+            List<TransactionWithCategory> transactions = overviewViewModel.getTransactions().getValue();
 
             updateRemainingBudget(budget, transactions);
         });
@@ -125,7 +126,7 @@ public class OverviewFragment extends Fragment
     // Helper method to calculate the remaining budget
     // The budget needs to be recalculated if either the budget changes or a new transaction is added
     // This method is therefore able to be called in the observers for both values
-    private void updateRemainingBudget(Double budget, List<Transaction> transactions)
+    private void updateRemainingBudget(Double budget, List<TransactionWithCategory> transactions)
     {
         // If both values are non-null, recalculate the remaining budget
         if (budget != null && transactions != null)
@@ -191,7 +192,7 @@ public class OverviewFragment extends Fragment
     // todo select by category on transactions page
     // todo stop using the legend and use a recycler view instead
 
-    private void updatePieChart(List<Transaction> transactions)
+    private void updatePieChart(List<TransactionWithCategory> transactions)
     {
         if (transactions == null || transactions.isEmpty())
         {

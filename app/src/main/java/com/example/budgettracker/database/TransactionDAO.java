@@ -8,6 +8,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.budgettracker.entities.Transaction;
+import com.example.budgettracker.entities.TransactionWithCategory;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ public interface TransactionDAO {
     // Return the entire table
     @Query("SELECT * FROM 'transaction'")
     LiveData<List<Transaction>> getAll();
+
+    // Return the table joined with the category table
+    @androidx.room.Transaction
+    @Query("SELECT * FROM 'transaction'")
+    LiveData<List<TransactionWithCategory>> getTransactionCategory();
 
     // Returns only the transaction matching the provided transaction ID
     @Query("SELECT * FROM 'transaction' WHERE id = (:id)")

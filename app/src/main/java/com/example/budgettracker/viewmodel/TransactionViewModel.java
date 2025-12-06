@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.budgettracker.entities.Transaction;
+import com.example.budgettracker.entities.TransactionWithCategory;
 import com.example.budgettracker.repositories.DataRepository;
 
 import java.util.List;
@@ -24,14 +25,14 @@ public class TransactionViewModel extends AndroidViewModel {
     }
 
     // Exposes the LiveData version of the transaction list to the fragments
-    public LiveData<List<Transaction>> getTransactions()
+    public LiveData<List<TransactionWithCategory>> getTransactions()
     {
         return dataRepository.getAllTransactions();
     }
 
     // Delete a transaction
-    public void deleteTransaction(Transaction transaction)
+    public void deleteTransaction(TransactionWithCategory transactionWithCategory)
     {
-        dataRepository.deleteTransaction(transaction);
+        dataRepository.deleteTransaction(transactionWithCategory.transaction);
     }
 }

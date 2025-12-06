@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.budgettracker.entities.Transaction;
+import com.example.budgettracker.entities.TransactionWithCategory;
 import com.example.budgettracker.enums.RepeatDuration;
 
 import java.text.ParseException;
@@ -120,9 +121,10 @@ public final class InputValidator
     }
 
     // todo move to transaction calculator
-    public static List<Transaction> sortTransactions(List<Transaction> transactions)
+    public static List<TransactionWithCategory> sortTransactions(List<TransactionWithCategory> transactions)
     {
-        transactions.sort((o1, o2) -> o2.getDateTime().compareTo(o1.getDateTime()));
+        transactions.sort((o1, o2) ->
+                o2.transaction.getDateTime().compareTo(o1.transaction.getDateTime()));
         return transactions;
     }
 }

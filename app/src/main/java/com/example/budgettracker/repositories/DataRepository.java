@@ -9,6 +9,7 @@ import com.example.budgettracker.database.CategoryDAO;
 import com.example.budgettracker.database.TransactionDAO;
 import com.example.budgettracker.entities.Category;
 import com.example.budgettracker.entities.Transaction;
+import com.example.budgettracker.entities.TransactionWithCategory;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -46,9 +47,9 @@ public class DataRepository {
         return INSTANCE;
     }
 
-    // TransactionDAO interface methods
-    public LiveData<List<Transaction>> getAllTransactions() {
-        return transactionDAO.getAll();
+    // Return the joined Transaction and Category tables
+    public LiveData<List<TransactionWithCategory>> getAllTransactions() {
+        return transactionDAO.getTransactionCategory();
     }
 
     public void insertTransaction(Transaction transaction) {
@@ -68,6 +69,11 @@ public class DataRepository {
 
     public void insertCategory(Category category) {
         executorService.execute(() -> categoryDAO.insertCategory(category));
+    }
+
+    public Category getCategoryByID(long categoryID)
+    {
+        return categoryDAO.getCategoryByID(categoryID);
     }
 
     public void deleteCategory(Category category)
