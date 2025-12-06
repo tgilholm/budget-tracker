@@ -13,7 +13,8 @@
 
         <!-- Create label to tell users to type in a number -->
         <!-- Add a TextInputEditText to receive user input for the transaction amount -->
-        <TextView
+
+    <TextView
             android:id="@+id/txtAddAmountLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,14 +82,19 @@
             app:layout_constraintTop_toBottomOf="@+id/txtAddAmountLabel" />
 
         <!-- Allows users to select between incoming & outgoing transactions -->
+
+    <!-- Contains each category in a Chip -->
+        <!-- Chips are styled to be a choice- users can only select one category at a time -->
+        <!-- singleSelection is set to 'true' to facilitate this -->
+
     <RadioGroup
         android:id="@+id/radioGroupSelectType"
         android:layout_width="134dp"
         android:layout_height="96dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/txtSetTypeLabel">
 
         <RadioButton
             android:id="@+id/rbIncoming"
@@ -104,10 +110,6 @@
             android:text="@string/outgoing" />
     </RadioGroup>
 
-        <!-- Contains each category in a Chip -->
-        <!-- Chips are styled to be a choice- users can only select one category at a time -->
-        <!-- singleSelection is set to 'true' to facilitate this -->
-
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupCategories"
         android:layout_width="189dp"
@@ -121,6 +123,13 @@
 
         <!-- TODO ADD CATEGORY BUTTON -->
 
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconVisible="false"
+            app:chipIcon="@drawable/add_icon"
+            app:chipIconVisible="true" />
     </com.google.android.material.chip.ChipGroup>
 
     <RadioGroup
@@ -217,5 +226,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtSetTypeLabel"
+        android:layout_width="138dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:text="Select Type"
+        android:textColor="@color/material_dynamic_neutral60"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,5 +11,10 @@
         <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Choice</item>
     </style>
 
+    <style name="Theme.BudgetTracker.ChipStyle.AddChip" parent="@style/Widget.MaterialComponents.Chip.Action">
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
+        <item name="chipIconEnabled">true</item>
+    </style>
+
     <style name="Theme.BudgetTracker" parent="Base.Theme.BudgetTracker" />
 </resources>
