@@ -19,7 +19,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="48dp"
             android:text="@string/title_transaction_history"
-            android:textColor="@color/material_dynamic_neutral60"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

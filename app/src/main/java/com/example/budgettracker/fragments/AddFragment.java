@@ -1,7 +1,7 @@
 package com.example.budgettracker.fragments;
 
 
-import android.graphics.drawable.Drawable;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -135,8 +135,13 @@ public class AddFragment extends Fragment
         chip.setCheckable(true);
         chip.setClickable(true);
 
+        int backgroundColor = ColorHandler.getColorARGB(getContext(), category.getColorID());
+
         // Set the background color of the chip top the category's colour
-        chip.setChipBackgroundColor(ColorHandler.resolveColorID(getContext(), category.getColorID()));
+        chip.setChipBackgroundColor(ColorHandler.resolveColorID(backgroundColor));
+
+        // Set the chip text colour to adapt to the chip background colour
+        chip.setTextColor(ColorHandler.resolveForegroundColor(requireContext(), backgroundColor));
 
         // Set the "tag" parameter of the Chip to the category ID
         // This facilitates the category selection logic

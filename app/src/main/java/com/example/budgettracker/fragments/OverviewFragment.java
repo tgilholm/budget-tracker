@@ -10,14 +10,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.budgettracker.R;
-import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.entities.TransactionWithCategory;
 import com.example.budgettracker.utility.CalculationUtils;
 import com.example.budgettracker.utility.ColorHandler;
@@ -165,10 +163,19 @@ public class OverviewFragment extends Fragment
         pieChart.setHoleRadius(40f);                                    // Make the hole smaller
         pieChart.setDrawEntryLabels(false);                             // Remove the labels from slices
 
+
+
+        // TODO Replace with RecyclerView
         // Set the legend of the pie chart
         Legend legend = pieChart.getLegend();
         legend.setEnabled(true);
         legend.setTextSize(12f);
+
+        // Set the colour to the dynamic foreground colour
+        legend.setTextColor(ColorHandler.getThemeColor(
+                requireContext(),
+                com.google.android.material.R.attr.colorOnSurfaceVariant
+        ));
         legend.setTypeface(Typeface.MONOSPACE);                         // Use a monospace font so string padding works properly
 
         // Set the alignment to be to the centre right of the chart
