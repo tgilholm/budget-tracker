@@ -58,9 +58,9 @@
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/intro_start"
+        android:layout_marginBottom="32dp"
         android:onClick="startButtonPressed"
+        android:text="@string/intro_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
