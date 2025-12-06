@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="Base.Theme.BudgetTracker" parent="Theme.Material3.DayNight.NoActionBar">
@@ -7,14 +7,27 @@
         <item name="android:statusBarColor">@color/budgetBlue</item>
     </style>
 
-    <style name="Theme.BudgetTracker.ChipStyle" parent="@style/Widget.MaterialComponents.Chip.Choice">
+    <style name="Widget.BudgetTracker.ChipStyle" parent="@style/Widget.MaterialComponents.Chip.Choice">
         <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Choice</item>
     </style>
 
-    <style name="Theme.BudgetTracker.ChipStyle.AddChip" parent="@style/Widget.MaterialComponents.Chip.Action">
-        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
-        <item name="chipIconEnabled">true</item>
+    <style name="Widget.BudgetTracker.Chip.Add" parent="@style/Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/budgetBlue</item>
+        <item name="chipIconTint">@android:color/white</item>
+        <item name="chipIconVisible">true</item>
+
+        <!-- Centre the icon -->
+        <item name="iconStartPadding">0dp</item>
+        <item name="iconEndPadding">0dp</item>
+        <item name="textStartPadding">0dp</item>
+        <item name="textEndPadding">0dp</item>
     </style>
 
+    <style name="ThemeOverlay.BudgetTracker.AddChip" parent="">
+        <item name="chipStyle">@style/Widget.BudgetTracker.Chip.Add</item>
+    </style>
+
+
     <style name="Theme.BudgetTracker" parent="Base.Theme.BudgetTracker" />
+
 </resources>

@@ -2,14 +2,15 @@ package com.example.budgettracker.fragments;
 
 
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,14 +122,14 @@ public class AddFragment extends Fragment
         }
 
         // Create the "add category" chip
-        chipGroupCategories.addView(createNewCategoryChip());
+        chipGroupCategories.addView(createAddCategoryChip());
     }
 
     // Takes a category and generates a chip //TODO Add color picker
     @NonNull
     private Chip createChip(@NonNull Category category)
     {
-        Chip chip = new Chip(getContext(), null, R.style.Theme_BudgetTracker_ChipStyle);
+        Chip chip = new Chip(getContext(), null, R.style.Widget_BudgetTracker_ChipStyle);
 
         // Set the name of the chip to the category name
         chip.setText(category.getName());
@@ -150,15 +151,16 @@ public class AddFragment extends Fragment
     }
 
     // Creates a chip with an add icon and an onclick to create a new category
-    private Chip createNewCategoryChip()
+    private Chip createAddCategoryChip()
     {
-        Chip chip = new Chip(getContext());
-        Drawable chipIconDrawable = new Drawable(R.drawable.add_icon);
-        chipIconDrawable.setTint(gray);
-
-
+        ContextThemeWrapper newContext = new ContextThemeWrapper(getContext(), R.style.ThemeOverlay_BudgetTracker_AddChip);
+        Chip chip = new Chip(newContext);
         chip.setChipIconResource(R.drawable.add_icon);
+        chip.setText("");
         chip.setClickable(true);
+
+        chip.setChipStartPadding(20);
+        chip.setChipEndPadding(20);
 
         return chip;
     }
