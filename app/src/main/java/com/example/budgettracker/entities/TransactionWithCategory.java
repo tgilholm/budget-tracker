@@ -16,16 +16,4 @@ public class TransactionWithCategory
             entityColumn = "categoryID"
     )
     public Category category;
-
-    // Get the name of the category linked to the Transaction
-    public String getCategoryName()
-    {
-        if (category != null )
-        {
-            return category.getName();
-        }
-        else {
-            return null;
-        }
-    }
 }

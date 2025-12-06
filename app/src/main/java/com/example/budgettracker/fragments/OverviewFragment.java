@@ -165,7 +165,6 @@ public class OverviewFragment extends Fragment
 
 
 
-        // TODO Replace with RecyclerView
         // Set the legend of the pie chart
         Legend legend = pieChart.getLegend();
         legend.setEnabled(true);
@@ -195,10 +194,6 @@ public class OverviewFragment extends Fragment
     // Also displays a legend of categories and the percentage they take up
     // Pads the label with spaces between the category name and percentage for readability
 
-    // todo diffutils?
-    // todo select by category on transactions page
-    // todo stop using the legend and use a recycler view instead
-
     private void updatePieChart(List<TransactionWithCategory> transactions)
     {
         if (transactions == null || transactions.isEmpty())
@@ -226,7 +221,6 @@ public class OverviewFragment extends Fragment
         // Add the pie entries to the a dataSet
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
 
-        // todo custom colors
         // Style the dataset
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS); // Add some sample colours
         dataSet.setValueFormatter(new PercentFormatter(pieChart));

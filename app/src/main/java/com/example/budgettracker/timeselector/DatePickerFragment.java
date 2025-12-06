@@ -2,6 +2,7 @@ package com.example.budgettracker.timeselector;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.DatePicker;
 
@@ -13,6 +14,14 @@ import java.util.Calendar;
 // Extend the DialogFragment class to contain a time picker element
 // The DialogFragment will float in the foreground of the activity
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+    private final Context context;
+
+    public DatePickerFragment(Context context)
+    {
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
@@ -24,7 +33,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
 
         // Open the Date Picker
-        return new DatePickerDialog(getActivity(), this, year, month, dayOfMonth);
+        return new DatePickerDialog(context, this, year, month, dayOfMonth);
     }
 
     @Override

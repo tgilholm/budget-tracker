@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.entities.TransactionWithCategory;
 import com.example.budgettracker.repositories.DataRepository;
 

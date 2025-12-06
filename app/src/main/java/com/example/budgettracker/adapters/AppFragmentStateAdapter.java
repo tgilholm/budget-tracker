@@ -7,12 +7,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.budgettracker.fragments.AddFragment;
 import com.example.budgettracker.fragments.OverviewFragment;
+import com.example.budgettracker.fragments.SettingsFragment;
 import com.example.budgettracker.fragments.TransactionsFragment;
 
 // Extend the FragmentStateAdapter class to create instances of each fragment
 public class AppFragmentStateAdapter extends FragmentStateAdapter {
 
-    // Inherited constructor from parent class, calls "super" to invoke parent constructor
     public AppFragmentStateAdapter(@NonNull FragmentActivity fragmentActivity)
     {
         super(fragmentActivity);
@@ -22,7 +22,7 @@ public class AppFragmentStateAdapter extends FragmentStateAdapter {
     // Overview, Add, and Transactions
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 
     @NonNull
@@ -31,6 +31,8 @@ public class AppFragmentStateAdapter extends FragmentStateAdapter {
     {
         // Switch to select which of the fragments to return
         switch (position) {
+            case 3:
+                return new SettingsFragment();
             case 2:
                 return new TransactionsFragment();
             case 1:

@@ -38,7 +38,6 @@ public final class ChipHandler
         return chip;
     }
 
-    // TODO Add color picker
     // Creates a chip with an add icon and an onclick to create a new category
     public static Chip createAddCategoryChip(@NonNull Context context)
     {

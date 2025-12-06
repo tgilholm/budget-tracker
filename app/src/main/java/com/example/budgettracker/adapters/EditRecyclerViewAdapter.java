@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budgettracker.R;
-import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.entities.TransactionWithCategory;
 
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
 // Extends the RecyclerViewAdapter to support removing transactions
 public class EditRecyclerViewAdapter extends RecyclerViewAdapter{
 
-    // Define a publicly accessible onDeleteCicked method through an interface
+    // Define a publicly accessible onDeleteClicked method through an interface
     public interface OnDeleteClickListener {
         void onDeleteClicked(TransactionWithCategory transaction);
     }
@@ -68,7 +67,6 @@ public class EditRecyclerViewAdapter extends RecyclerViewAdapter{
 
             // Extend the bind method by setting a click listener on the deleteButton
             // Removes the transaction when the button is clicked
-            // TODO make a confirmation popup
             setDeleteButton(deleteButton, transaction);
 
         }

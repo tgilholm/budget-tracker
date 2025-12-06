@@ -118,14 +118,14 @@ public class AddFragment extends Fragment
     // Open a DatePickerDialog when the user interacts with the date field
     public void onDatePressed(View view)
     {
-        DatePickerFragment datePicker = new DatePickerFragment();
+        DatePickerFragment datePicker = new DatePickerFragment(getContext());
         datePicker.show(getParentFragmentManager(), "datePicker");
     }
 
     // Open a TimePickerDialog when the user interacts with the date field
     public void onTimePressed(View view)
     {
-        TimePickerFragment timePicker = new TimePickerFragment();
+        TimePickerFragment timePicker = new TimePickerFragment(getContext());
         timePicker.show(getParentFragmentManager(), "timePicker");
     }
 
@@ -143,8 +143,6 @@ public class AddFragment extends Fragment
 
     // Handle the logic for the add button
     // Collects all the user input into a new transaction
-    // TODO set character limits on fields
-    // TODO clear all fields on add
     public void onAddPressed(View view)
     {
         // Transaction order:

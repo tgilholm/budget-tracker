@@ -2,6 +2,7 @@ package com.example.budgettracker.timeselector;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.TimePicker;
 
@@ -14,6 +15,14 @@ import java.util.Locale;
 // Extend the DialogFragment class to contain a time picker element
 // The DialogFragment will float in the foreground of the activity
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+
+    private final Context context;
+
+    public TimePickerFragment(Context context)
+    {
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
@@ -22,7 +31,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
 
-        return new TimePickerDialog(getActivity(), this, hour, minute, true);
+        return new TimePickerDialog(context, this, hour, minute, true);
     }
 
     @Override

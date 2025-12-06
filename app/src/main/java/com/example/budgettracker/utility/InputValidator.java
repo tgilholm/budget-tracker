@@ -9,7 +9,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.budgettracker.entities.Transaction;
 import com.example.budgettracker.entities.TransactionWithCategory;
 import com.example.budgettracker.enums.RepeatDuration;
 
@@ -22,8 +21,6 @@ import java.util.Locale;
 
 public final class InputValidator
 {
-    // Todo change input validation methods to be more re-usable
-    // todo length limits
     // Takes input to validate and context to pass to toast for error communication
     // Returns false for empty strings or non-matching strings and true otherwise
     public static boolean validateCurrencyInput(Context context, String input)
@@ -68,8 +65,6 @@ public final class InputValidator
         }
     }
 
-
-    // todo rename and cleanup
     // Takes two String parameters, dateInput and timeInput and attempts to parse them into a Calendar object
     public static Calendar validateDateTimeInput(Context context, String dateTimeInput)
     {
@@ -100,7 +95,6 @@ public final class InputValidator
         }
     }
 
-    // todo move
     public static RepeatDuration selectRepeatDuration(String input)
     {
         switch (input)
@@ -120,7 +114,6 @@ public final class InputValidator
         }
     }
 
-    // todo move to transaction calculator
     public static List<TransactionWithCategory> sortTransactions(List<TransactionWithCategory> transactions)
     {
         transactions.sort((o1, o2) ->

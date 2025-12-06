@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -105,6 +103,8 @@ public class MainActivity extends AppCompatActivity
                         case 2:
                             tab.setText(R.string.title_transactions);
                             break;
+                        case 3:
+                            tab.setText(R.string.title_settings);
                     }
                 }).
 
@@ -127,6 +127,8 @@ public class MainActivity extends AppCompatActivity
                     case 2:
                         toolbar.setTitle(R.string.title_transactions);
                         break;
+                    case 3:
+                        toolbar.setTitle(R.string.title_settings);
                 }
                 super.onPageSelected(position);
             }
@@ -144,28 +146,10 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    // Send the user to the Settings activity
-    public void settingsButtonPressed(View v)
-    {
-        goToSettings();
-    }
-
-    public void notificationsButtonPressed(View v)
-    {
-        Toast toast = Toast.makeText(this, "Notifications", Toast.LENGTH_LONG);
-        toast.show();
-    }
-
     // Creates an Intent to take the user to the FirstTimeStartup activity
     private void firstTimeStartup()
     {
         Intent intent = new Intent(this, FirstTimeStartupActivity.class);
-        startActivity(intent);
-    }
-
-    private void goToSettings()
-    {
-        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }

@@ -10,12 +10,13 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.example.budgettracker.R;
 import com.example.budgettracker.utility.InputValidator;
 
-// todo refactor to use fragment within main activity
-
-// Provides functionality to the layout items
+// The SettingsFragment contains the following options
+/*
+    Edit the pre-set budget
+    Remove all data and start again (following a confirmation screen)
+ */
 public class SettingsFragment extends PreferenceFragmentCompat
 {
-    // todo input validation on settings changes
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey)
     {

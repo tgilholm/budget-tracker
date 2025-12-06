@@ -30,7 +30,6 @@ public class AddViewModel extends AndroidViewModel
     // Passes a new transaction to the Repository
     public void addTransaction(double amount, TransactionType type, Calendar dateTime, long categoryID, RepeatDuration repeatDuration)
     {
-        // todo input validation here instead of in fragment
 
         dataRepository.insertTransaction(new Transaction(
                 amount,

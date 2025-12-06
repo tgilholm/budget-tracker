@@ -17,58 +17,17 @@
         android:layout_height="wrap_content"
         android:background="@color/budgetBlue">
 
-        <!-- Contain the MaterialToolbar & icons in a ConstraintLayout -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!-- Displays a title bar section to display the name of the current tab above the nav bar -->
+        <!-- Replaced Toolbar with MaterialToolbar to handle camera notch on Pixel displays-->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/title_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!-- Displays a title bar section to display the name of the current tab above the nav bar -->
-            <!-- Replaced Toolbar with MaterialToolbar to handle camera notch on Pixel displays-->
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/title_bar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:title="@string/app_name"
-                app:titleCentered="true"
-                app:titleTextColor="@color/white" />
-
-            <!-- Display the Notifications icon -->
-            <ImageButton
-                android:id="@+id/notificationButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/cd_notifications"
-                android:onClick="notificationsButtonPressed"
-                android:src="@drawable/notifications_icon"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- Display the Settings icon -->
-            <ImageButton
-                android:id="@+id/settingsButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="4dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/cd_settings"
-                android:onClick="settingsButtonPressed"
-                android:src="@drawable/settings_icon"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/app_name"
+            app:titleCentered="true"
+            app:titleTextColor="@color/white" />
 
         <!-- Add a TabLayout to act as a navigation bar -->
         <com.google.android.material.tabs.TabLayout

@@ -1,19 +1,13 @@
 package com.example.budgettracker.entities;
 
-
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.util.Locale;
-import java.util.Objects;
 
 @Entity(tableName = "category")
 public final class Category {
     private static long nextID;
 
-    @NonNull
     @PrimaryKey
     private long categoryID;                  // The unique ID of the category
 
