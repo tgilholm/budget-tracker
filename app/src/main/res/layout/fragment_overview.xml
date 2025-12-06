@@ -29,7 +29,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="228dp"
         android:text="@string/placeholder_budget_amount"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="@color/brightGreen"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
