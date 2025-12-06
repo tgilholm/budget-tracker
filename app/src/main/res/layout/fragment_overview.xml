@@ -16,6 +16,7 @@
         <!-- Create label to tell users what txtBudgetAmount is referring to -->
         <!-- TODO edit text colours -->
 
+        <!-- Display the pie chart -->
         <LinearLayout
             android:id="@id/pieChartContainer"
             android:layout_width="match_parent"
@@ -39,8 +40,7 @@
         </LinearLayout>
 
 
-        <!-- TextView to display the currently remaining budget -->
-
+        <!-- Display the remaining budget -->
         <TextView
             android:id="@+id/txtBudgetLabel"
             android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="48dp"
             android:text="@string/label_budget_remaining"
-            android:textColor="@color/material_dynamic_neutral60"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -60,15 +60,14 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="228dp"
             android:text="@string/placeholder_budget_amount"
-            android:textColor="@color/material_dynamic_neutral30"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtBudgetLabel" />
 
 
-        <!-- TODO put pie chart & categories in a horizontal view -->
-        <!-- Display the pie chart -->
+        <!-- TODO put pie chart categories in a recyclerview -->
 
         <TextView
             android:id="@+id/txtRecyclerViewLabel"
@@ -77,7 +76,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="@string/recent_transactions"
-            android:textColor="@color/material_dynamic_neutral60"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pieChartContainer" />
@@ -124,7 +123,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:text="@string/placeholder_monthly_budget"
-            android:textColor="@color/material_dynamic_neutral60"
+            android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtBudgetRemaining" />
 

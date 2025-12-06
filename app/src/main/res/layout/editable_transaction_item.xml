@@ -37,13 +37,13 @@
         <TextView
             android:id="@+id/textCategory"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/placeholder_category"
+            android:layout_gravity="center"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@string/placeholder_category"
             android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -58,13 +58,13 @@
         <TextView
             android:id="@+id/textDateTime"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="match_parent"
-            android:text="@string/placeholder_date"
-            android:maxLines="2"
+            android:layout_gravity="center"
             android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/placeholder_date"
             android:textAppearance="?attr/textAppearanceBody1"
-            android:textColor="@color/black" />
+            android:textColor="?attr/colorOnSurfaceVariant" />
     </LinearLayout>
 
     <LinearLayout

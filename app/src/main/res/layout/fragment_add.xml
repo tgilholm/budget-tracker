@@ -13,19 +13,19 @@
 
         <!-- Create label to tell users to type in a number -->
         <!-- Add a TextInputEditText to receive user input for the transaction amount -->
-        <TextView
-            android:id="@+id/txtAddAmountLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="48dp"
-            android:text="@string/label_add_transaction"
-            android:textColor="@color/material_dynamic_neutral60"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <TextView
+        android:id="@+id/txtAddAmountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/label_add_transaction"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        </TextView>
+    </TextView>
 
     <TextView
         android:id="@+id/txtSetCategoryLabel"
@@ -34,7 +34,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         android:text="@string/set_a_category"
-        android:textColor="@color/material_dynamic_neutral60"
+        android:textColor="?attr/colorOnSurfaceVariant"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextAmount">
@@ -48,7 +48,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="24dp"
         android:text="@string/repeat_every"
-        android:textColor="@color/material_dynamic_neutral60"
+        android:textColor="?attr/colorOnSurfaceVariant"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupSelectType">
@@ -69,16 +69,17 @@
 
     </com.google.android.material.textfield.TextInputEditText>
 
-        <TextView
-            android:id="@+id/txtPoundSign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/pound_sign"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtAddAmountLabel" />
+    <TextView
+        android:id="@+id/txtPoundSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/pound_sign"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddAmountLabel" />
 
         <!-- Allows users to select between incoming & outgoing transactions -->
     <RadioGroup
@@ -171,7 +172,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         android:text="Date/Time"
-        android:textColor="@color/material_dynamic_neutral60"
+        android:textColor="?attr/colorOnSurfaceVariant"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroupCategories">

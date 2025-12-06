@@ -105,13 +105,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             // For positive (income) transactions, set the color to green
             if (t.getType() == TransactionType.INCOMING)
             {
-                textAmount.setTextColor(ColorHandler.resolveColorID(itemView.getContext(), R.color.brightGreen));
+                textAmount.setTextColor(ColorHandler.resolveColorID(ColorHandler.getColorARGB(itemView.getContext(), R.color.brightGreen)));
             } else
             {
                 // For negative transactions set the color to red and prepend a '-'
                 String negatedString = "-" + textAmount.getText();
                 textAmount.setText(negatedString);
-                textAmount.setTextColor(ColorHandler.resolveColorID(itemView.getContext(), R.color.brightRed));
+                textAmount.setTextColor(ColorHandler.resolveColorID(ColorHandler.getColorARGB(itemView.getContext(), R.color.brightRed)));
             }
             textDateTime.setText(t.getDateTimeString());
         }
