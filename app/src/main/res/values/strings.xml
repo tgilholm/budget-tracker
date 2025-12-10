@@ -20,6 +20,8 @@
     <string name="label_select_type">Select Type</string>
     <string name="label_recent_transactions">Recent Transactions</string>
     <string name="label_transaction_history">Transaction History</string>
+    <string name="label_add_category">Add Category</string>
+    <string name="label_choose_colour">Choose Colour</string>
 
     <!-- Radio Buttons -->
     <string name="rb_incoming">Incoming</string>
@@ -35,6 +37,7 @@
     <string name="hint_set_date">Set a Date</string>
     <string name="hint_set_time">Set a Time</string>
     <string name="hint_set_budget">Set a Budget</string>
+    <string name="hint_category_name">Category Name</string>
 
     <!-- Content Description -->
     <string name="cd_remove_transaction">Remove Transaction</string>

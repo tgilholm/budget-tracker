@@ -25,8 +25,8 @@ public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.
         void onItemClick(int color);
     }
 
-    private Context context;
-    private List<Integer> colorList;
+    private final Context context;
+    private final List<Integer> colorList;
     private final OnItemClickListener onItemClick;
 
 

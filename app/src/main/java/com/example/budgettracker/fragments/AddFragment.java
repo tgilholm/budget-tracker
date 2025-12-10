@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -116,10 +118,9 @@ public class AddFragment extends Fragment
 
         // Set the onClickListener for the chip
         addChip.setOnClickListener(v -> {
+
             // Open a DialogFragment with a Name and Colour picker
-
             showCategoryCreator();
-
         });
 
         chipGroupCategories.addView(addChip);
@@ -129,11 +130,10 @@ public class AddFragment extends Fragment
     // Handle opening the category creator
     private void showCategoryCreator()
     {
-        // Get the list of colours from the colors.xml file
 
 
         // Add the colours to the RecyclerView and set the adapter
-
+        RecyclerView recyclerView = new RecyclerView(requireContext());
 
 
         // Handle what happens when a colour is selected
