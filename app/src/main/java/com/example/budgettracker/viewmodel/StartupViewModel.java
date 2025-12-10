@@ -38,7 +38,7 @@ public class StartupViewModel extends AndroidViewModel
                 if (categories == null || categories.isEmpty()) {
                     Log.v("StartupViewModel", "Adding defaults");
                     List<String> categoryNames = Arrays.asList("Entertainment", "Petrol", "Pets", "Travel", "Shopping");
-                    List<Integer> colorIDs = Arrays.asList(R.color.lightGreen, R.color.lightBlue, R.color.lightRed, R.color.lightYellow, R.color.lightPurple);
+                    List<Integer> colorIDs = Arrays.asList(R.color.limeGreen, R.color.lightBlue, R.color.darkOrange, R.color.purple, R.color.teal);
 
                     for (String i : categoryNames) {
                         // Resolve the color IDs from colors.xml to a color integer before passing to Chip

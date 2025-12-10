@@ -6,13 +6,21 @@
     <color name="budgetBlue">#304FFE</color>
 
     <!--  Light colors for chips  -->
-    <color name="lightBlue">#ADD8E6</color>
-    <color name="lightGreen">#90EE90</color>
-    <color name="lightPink">#FFB6C1</color>
-    <color name="lightOrange">#FED8B1</color>
-    <color name="lightRed">#F08080</color>
-    <color name="lightYellow">#FFFFE0</color>
-    <color name="lightPurple">#E6E6FA</color>
+    <color name="red">#F44336</color>
+    <color name="hotPink">#E91E63</color>
+    <color name="purple">#9C27B0</color>
+    <color name="darkPurple">#673AB7</color>
+    <color name="darkBlue">#3F51B5</color>
+    <color name="lightBlue">#2196F3</color>
+    <color name="blue">#03A9F4</color>
+    <color name="cyan">#00BCD4</color>
+    <color name="teal">#009688</color>
+    <color name="green">#4CAF50</color>
+    <color name="limeGreen">#8BC34A</color>
+    <color name="yellowGreen">#CDDC39</color>
+    <color name="lightOrange">#FFC107</color>
+    <color name="orange">#FF9800</color>
+    <color name="darkOrange">#FF5722</color>
 
     <!--  Bright Colors  -->
     <color name="brightGreen">#43A047</color>

@@ -118,12 +118,29 @@ public class AddFragment extends Fragment
         addChip.setOnClickListener(v -> {
             // Open a DialogFragment with a Name and Colour picker
 
-            CategoryCreatorFragment categoryCreatorFragment = new CategoryCreatorFragment(requireContext());
-            categoryCreatorFragment.show(getParentFragmentManager(), "categoryCreator");
+            showCategoryCreator();
 
         });
 
         chipGroupCategories.addView(addChip);
+    }
+
+
+    // Handle opening the category creator
+    private void showCategoryCreator()
+    {
+        // Get the list of colours from the colors.xml file
+
+
+        // Add the colours to the RecyclerView and set the adapter
+
+
+
+        // Handle what happens when a colour is selected
+
+
+        CategoryCreatorFragment categoryCreatorFragment = new CategoryCreatorFragment(requireContext());
+        categoryCreatorFragment.show(getParentFragmentManager(), "categoryCreator");
     }
 
 
