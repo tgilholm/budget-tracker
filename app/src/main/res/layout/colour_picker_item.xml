@@ -21,6 +21,7 @@
     <!-- The checkmark icon sitting on top of the block -->
     <!-- This is hidden by default and displayed when clicked -->
     <View
+        android:id="@+id/checkmark"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:padding="4dp"

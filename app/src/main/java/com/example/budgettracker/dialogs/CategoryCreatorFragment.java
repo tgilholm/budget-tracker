@@ -68,12 +68,6 @@ public class CategoryCreatorFragment extends DialogFragment
                 R.color.orange,
                 R.color.darkOrange
         };
-        List<Integer> resolvedColorList = new ArrayList<>();
-
-        for (int i : colorIDs)
-        {
-            resolvedColorList.add(ColorHandler.getColorARGB(context, i));
-        }
 
         int columnCount = 4;    // 4 Columns
         int spacing = 16;
@@ -93,7 +87,7 @@ public class CategoryCreatorFragment extends DialogFragment
         });
 
 
-        ColorPickerAdapter colorPickerAdapter = new ColorPickerAdapter(context, resolvedColorList, selectedColour ->
+        ColorPickerAdapter colorPickerAdapter = new ColorPickerAdapter(context, List.of(colorIDs), selectedColour ->
         {
             // When a colour is selected, set it to "ticked" and get the colour from it
             colorChoice = selectedColour;
