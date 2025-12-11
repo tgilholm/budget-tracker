@@ -201,28 +201,11 @@ public class OverviewFragment extends Fragment
             return;
         }
 
-        // Get the top 3 categories and group the rest into other
-        Map<String, Double> categoryTotals = overviewViewModel.getTopNCategoryTotals(transactions, 3);
+        // Get the PieEntries from the ViewModel
+        PieDataSet dataSet = overviewViewModel.getPieData(transactions);
 
-        // Get the total spend
-        double totalSpend = overviewViewModel.getTotalSpend(transactions);
-
-        // Create a list of pie entries
-        List<PieEntry> pieEntries = new ArrayList<>();
-
-        for (Map.Entry<String, Double> entry : categoryTotals.entrySet())
-        {
-            String label = StringUtils.formatLabel(
-                    entry.getKey(),
-                    CalculationUtils.calculatePercentage(entry.getValue(), totalSpend));
-            pieEntries.add(new PieEntry(entry.getValue().floatValue(), label));
-        }
-
-        // Add the pie entries to the a dataSet
-        PieDataSet dataSet = new PieDataSet(pieEntries, "");
 
         // Style the dataset
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS); // Add some sample colours
         dataSet.setValueFormatter(new PercentFormatter(pieChart));
         dataSet.setSliceSpace(2f);
         dataSet.setDrawValues(false); // Remove the labels on the slices themselves
